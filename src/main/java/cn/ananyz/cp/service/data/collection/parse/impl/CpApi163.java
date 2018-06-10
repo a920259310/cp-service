@@ -6,17 +6,17 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by 王晶 on 2018/6/3.
  */
+@Component
 public class CpApi163 implements CpApi {
 
     private String parseDateFormat = "yyyyMMdd";
@@ -33,6 +33,7 @@ public class CpApi163 implements CpApi {
         Elements select1 = select.select("[data-win-number]");
         return select1;
     }
+
     public List<CPDataModel> getTodayAllData(Date date) throws IOException {
         ArrayList<CPDataModel> cpDataModels = new ArrayList<CPDataModel>();
         Document document = getTodayDocument(date);
@@ -58,5 +59,34 @@ public class CpApi163 implements CpApi {
             cpDataModels.add(cPDataModel);
         }
         return cpDataModels;
+    }
+
+    @Override
+    public CPDataModel getTodayLastData(Date date) throws IOException {
+
+        List<CPDataModel> todayAllDatas = getTodayAllData(date);
+        if(todayAllDatas == null || todayAllDatas.size() == 0){
+            return null;
+        }
+        Collections.sort(todayAllDatas, new Comparator<CPDataModel>() {
+            @Override
+            public int compare(CPDataModel o1, CPDataModel o2) {
+                return o1.getLongDateAndQiHao().compareTo(o2.getLongDateAndQiHao());
+            }
+        });
+        return todayAllDatas.get(todayAllDatas.size()-1);
+    }
+
+
+    @Override
+    public CPDataModel getDataByDateAndQiHao(Date date, Integer qiHao) throws IOException {
+        List<CPDataModel> todayAllDatas = getTodayAllData(date);
+
+        for(CPDataModel todayAllData : todayAllDatas ){
+            if(qiHao == Integer.parseInt(todayAllData.getShortQiHao())){
+                return todayAllData;
+            }
+        }
+        return null;
     }
 }

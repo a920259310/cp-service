@@ -5,8 +5,8 @@
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="cp_date" property="cpDate" jdbcType="DATE" />
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="cp_date" property="cpDate" jdbcType="VARCHAR" />
     <result column="cp_qi_hao" property="cpQiHao" jdbcType="INTEGER" />
     <result column="wan" property="wan" jdbcType="INTEGER" />
     <result column="qian" property="qian" jdbcType="INTEGER" />
@@ -15,4 +15,8 @@
     <result column="ge" property="ge" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <select id="queryLastData" resultMap="BaseResultMap" >
+    SELECT * FROM cp_data ORDER BY cp_date DESC,cp_qi_hao DESC LIMIT 0,1
+  </select>
 </mapper>

@@ -17,7 +17,7 @@ import java.util.List;
 public class Test {
     public static void main(String[] args) throws IOException {
         CpApi cpApi = new CpApi163();
-        List<CPDataModel> todayAllData = cpApi.getTodayAllData(new Date());
+        CPDataModel todayAllData = cpApi.getTodayLastData(new Date());
         System.out.println(todayAllData);
     }
 }

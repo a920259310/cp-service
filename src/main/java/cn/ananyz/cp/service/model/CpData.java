@@ -9,14 +9,14 @@ public class CpData {
      * 主键
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private String id;
 
     /**
      * 长期号 如:(20180101-120)
      */
     @Column(name = "cp_date")
-    private Date cpDate;
+    private String cpDate;
 
     /**
      * 短期号 如:(120)
@@ -55,39 +55,19 @@ public class CpData {
     @Column(name = "create_time")
     private Date createTime;
 
-    /**
-     * 获取主键
-     *
-     * @return id - 主键
-     */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    /**
-     * 设置主键
-     *
-     * @param id 主键
-     */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    /**
-     * 获取长期号 如:(20180101-120)
-     *
-     * @return cp_date - 长期号 如:(20180101-120)
-     */
-    public Date getCpDate() {
+    public String getCpDate() {
         return cpDate;
     }
 
-    /**
-     * 设置长期号 如:(20180101-120)
-     *
-     * @param cpDate 长期号 如:(20180101-120)
-     */
-    public void setCpDate(Date cpDate) {
+    public void setCpDate(String cpDate) {
         this.cpDate = cpDate;
     }
 

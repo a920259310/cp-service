@@ -53,9 +53,9 @@
         <javaClientGenerator targetPackage="dao" targetProject="src/main/java/cn/ananyz/cp/service"
                              type="XMLMAPPER"/>
 
-        <table tableName="%">
+        <!--<table tableName="%">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>
+        </table>-->
         <!--<table tableName="system_info">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>-->

@@ -37,8 +37,11 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-
     <context:property-placeholder ignore-unresolvable="true" location="classpath:config.properties"/>
+
+    <context:component-scan base-package="cn.ananyz.cp.service.service" />
+    <context:component-scan base-package="cn.ananyz.cp.service.data.collection" />
+    <context:component-scan base-package="cn.ananyz.cp.service.mail" />
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClass}"/>
@@ -66,7 +69,7 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" >
             <array>
-                <value>classpath:**/mapper/*.xml</value>
+                <value>classpath:mapper/*.xml</value>
             </array>
         </property>
         <property name="typeAliasesPackage" value="cn.ananyz.cp.service.model"/>
@@ -127,5 +130,14 @@
     <bean id="jdbcTemplateSelect" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.163.com"></property>
+        <property name="port" value="25"></property>
+        <property name="username" value="lian920259310@163.com"></property>
+        <property name="password" value="f19931006"></property>
+    </bean>
+
+
+    <import resource="spring-schedule.xml"></import>
 
 </beans>

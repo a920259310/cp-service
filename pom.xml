@@ -19,6 +19,7 @@
         <mapper.version>3.3.6</mapper.version>
         <pagehelper.version>5.0.0</pagehelper.version>
         <mysql.version>5.1.38</mysql.version>
+        <mail.version>1.4.7</mail.version>
 
         <!--<spring.version>4.1.2.RELEASE</spring.version>-->
         <spring.version>5.0.1.RELEASE</spring.version>
@@ -31,7 +32,6 @@
         <jooq.version>3.9.5</jooq.version>
 
         <jsoup.version>1.11.3</jsoup.version>
-
         <!-- web 环境 -->
         <jstl.version>1.2</jstl.version>
         <standard.version>1.1.2</standard.version>
@@ -281,6 +281,19 @@
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${log4j.slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+
             </dependency>
 
         </dependencies>

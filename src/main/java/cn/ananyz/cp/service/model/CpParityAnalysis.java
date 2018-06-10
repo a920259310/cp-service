@@ -16,21 +16,21 @@ public class CpParityAnalysis {
      * 主表主键(cp_data)
      */
     @Column(name = "cp_data_id")
-    private Long cpDataId;
+    private String cpDataId;
 
     /**
      * 奇偶(1:奇数 2:偶数)
      */
-    private Integer parity;
+    protected Integer parity;
 
     /**
      * 什么位置(1:万 2:千 3:百 4:十 5:个)
      */
     @Column(name = "index_num")
-    private String indexNum;
+    protected String indexNum;
 
     @Column(name = "batch_num")
-    private Long batchNum;
+    protected Long batchNum;
 
     @Column(name = "create_time")
     private Date createTime;
@@ -53,21 +53,11 @@ public class CpParityAnalysis {
         this.id = id;
     }
 
-    /**
-     * 获取主表主键(cp_data)
-     *
-     * @return cp_data_id - 主表主键(cp_data)
-     */
-    public Long getCpDataId() {
+    public String getCpDataId() {
         return cpDataId;
     }
 
-    /**
-     * 设置主表主键(cp_data)
-     *
-     * @param cpDataId 主表主键(cp_data)
-     */
-    public void setCpDataId(Long cpDataId) {
+    public void setCpDataId(String cpDataId) {
         this.cpDataId = cpDataId;
     }
 

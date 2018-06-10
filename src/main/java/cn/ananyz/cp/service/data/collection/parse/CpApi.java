@@ -11,4 +11,8 @@ import java.util.List;
  */
 public interface CpApi {
     public List<CPDataModel> getTodayAllData(Date date) throws IOException;
+
+    public CPDataModel getTodayLastData(Date date) throws IOException;
+
+    public CPDataModel getDataByDateAndQiHao(Date date, Integer qiHao) throws IOException;
 }

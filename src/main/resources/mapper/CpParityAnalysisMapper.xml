@@ -6,10 +6,40 @@
       WARNING - @mbggenerated
     -->
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="cp_data_id" property="cpDataId" jdbcType="BIGINT" />
+    <result column="cp_data_id" property="cpDataId" jdbcType="VARCHAR" />
     <result column="parity" property="parity" jdbcType="INTEGER" />
     <result column="index_num" property="indexNum" jdbcType="CHAR" />
     <result column="batch_num" property="batchNum" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+  <resultMap id="BaseResultMapResult" type="cn.ananyz.cp.service.model.CpParityAnalysisResult" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cp_data_id" property="cpDataId" jdbcType="VARCHAR" />
+    <result column="parity" property="parity" jdbcType="INTEGER" />
+    <result column="index_num" property="indexNum" jdbcType="CHAR" />
+    <result column="batch_num" property="batchNum" jdbcType="BIGINT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ci_shu" property="ciShu" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="queryLastTimeData" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT * FROM cp.cp_parity_analysis c
+    INNER JOIN (
+      SELECT * FROM cp.cp_parity_analysis WHERE index_num = #{index_num}
+
+      ORDER BY create_time DESC LIMIT 0,1
+    ) t ON t.cp_data_id = c.cp_data_id AND t.index_num = c.index_num
+  </select>
+
+  <select id="queryCountByIndexNum" resultMap="BaseResultMapResult" parameterType="java.lang.String">
+    SELECT t1.index_num,t1.batch_num,COUNT(1) AS ci_shu,parity FROM cp.cp_parity_analysis t1 INNER JOIN (
+    SELECT MAX(batch_num) AS batch_num,index_num FROM cp.cp_parity_analysis WHERE index_num = #{index_num}
+    ) t2
+    WHERE t1.index_num = t2.index_num AND t1.batch_num = t2.batch_num
+    GROUP BY t1.index_num,t1.batch_num
+  </select>
 </mapper>
