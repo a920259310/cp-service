@@ -8,6 +8,7 @@ import cn.ananyz.cp.service.model.CpParityAnalysisResult;
 import cn.ananyz.cp.service.service.AnalysisEngineService;
 import cn.ananyz.cp.service.service.CpDataService;
 import cn.ananyz.cp.service.service.CpParityAnalysisService;
+import cn.ananyz.cp.service.utils.DateUtil;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,10 +59,10 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
         int ciShu = cpParityAnalysisResult.getCiShu();
         Long batchNum = cpParityAnalysisResult.getBatchNum();
 
-        if(ciShu > 4){
-            mailService.send(MailConfig.from,MailConfig.to,MailConfig.subject,
-                    MailConfig.text + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum + "," +
-                            "日期:"+cpData.getCpDate()+",期号:" + cpData.getCpQiHao() + ",时间:" + cpData.getCreateTime() + ",号码:"
+        if(ciShu > 1){
+            mailService.send(MailConfig.from,MailConfig.to,MailConfig.subject + "," +
+                            "日期:"+cpData.getCpDate()+",期号:" + cpData.getCpQiHao(),
+                    MailConfig.text + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum  + ",时间:" + DateUtil.formatDate(cpData.getCreateTime(),DateUtil.PATTERN_DATE_TIME) + ",号码:"
                             + cpData.getWan() + cpData.getQian() + cpData.getBai() + cpData.getShi() + cpData.getGe());
         }
 
