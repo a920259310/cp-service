@@ -59,7 +59,7 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
         int ciShu = cpParityAnalysisResult.getCiShu();
         Long batchNum = cpParityAnalysisResult.getBatchNum();
 
-        if(ciShu > 1){
+        if(ciShu > 3){
             mailService.send(MailConfig.from,MailConfig.to,MailConfig.subject + "," +
                             "日期:"+cpData.getCpDate()+",期号:" + cpData.getCpQiHao(),
                     MailConfig.text + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum  + ",时间:" + DateUtil.formatDate(cpData.getCreateTime(),DateUtil.PATTERN_DATE_TIME) + ",号码:"
