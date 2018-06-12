@@ -5,15 +5,12 @@ import cn.ananyz.cp.service.data.collection.parse.CpApi;
 import cn.ananyz.cp.service.model.CpData;
 import cn.ananyz.cp.service.model.CpParityAnalysisResult;
 import cn.ananyz.cp.service.service.AnalysisEngineService;
-import cn.ananyz.cp.service.service.CpDataService;
 import cn.ananyz.cp.service.service.CpParityAnalysisService;
 import cn.ananyz.cp.service.utils.DateUtil;
-import org.apache.commons.lang.time.DateUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,7 +18,7 @@ public class TestApp {
     static ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 
     public static void main(String[] args) throws Exception {
-        AnalysisEngineService bean = classPathXmlApplicationContext.getBean(AnalysisEngineService.class);
+//        AnalysisEngineService bean = classPathXmlApplicationContext.getBean(AnalysisEngineService.class);
 //        insertCpData(bean);
 
 //        String[] strings = {"1", "2","3", "4","5"};
@@ -33,7 +30,7 @@ public class TestApp {
         CPDataModel dataByDateAndQiHao = cpApi.getDataByDateAndQiHao(new Date(), 41);
         System.out.println(dataByDateAndQiHao);*/
 
-        Thread.sleep(100000000l);
+//        Thread.sleep(1000000000l);
 
 //        mailTest();
 //        jiOuCiShuCount();
