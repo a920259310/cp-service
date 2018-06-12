@@ -16,10 +16,10 @@
     </task:scheduled-tasks>
 
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,7,12,17,22,27,32,37,42,47,52,57 22,23 * * ?"/>
+        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,7,12,17,22,27,32,37,42,47,52,57 22-23 * * ?"/>
     </task:scheduled-tasks>
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,7,12,17,22,27,32,37,42,47,52,57 0,1 * * ?"/>
+        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,7,12,17,22,27,32,37,42,47,52,57 0-1 * * ?"/>
     </task:scheduled-tasks>
 
 </beans>
