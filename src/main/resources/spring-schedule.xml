@@ -12,7 +12,7 @@
    <context:component-scan base-package="cn.ananyz.cp.service.schedule" />
 
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,12,22,32,42,52 10-21 * * ?"/>
+        <task:scheduled ref="scheduleComment" method="queryCpData" cron="0 2,12,22,32,42,52 10,11,12,13,14,15,16,17,18,19,20,21 * * ?"/>
     </task:scheduled-tasks>
 
     <task:scheduled-tasks>
