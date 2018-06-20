@@ -27,6 +27,9 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
     @Autowired
     private MailService mailService;
 
+    @Autowired
+    private MailConfig mailConfig;
+
     @Override
     public void insert(CpData cpData) throws Exception {
 
@@ -59,10 +62,10 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
         int ciShu = cpParityAnalysisResult.getCiShu();
         Long batchNum = cpParityAnalysisResult.getBatchNum();
 
-        if(ciShu > 3){
-            mailService.send(MailConfig.from,MailConfig.to,MailConfig.subject + "," +
+        if(ciShu > 4){
+            mailService.sendMorePerson(mailConfig.getFrom(),mailConfig.getTo(),"改版前:" + mailConfig.getSubject() + "," +
                             "日期:"+cpData.getCpDate()+",期号:" + cpData.getCpQiHao(),
-                    MailConfig.text + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum  + ",时间:" + DateUtil.formatDate(cpData.getCreateTime(),DateUtil.PATTERN_DATE_TIME) + ",号码:"
+                    mailConfig.getText() + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum  + ",时间:" + DateUtil.formatDate(cpData.getCreateTime(),DateUtil.PATTERN_DATE_TIME) + ",号码:"
                             + cpData.getWan() + cpData.getQian() + cpData.getBai() + cpData.getShi() + cpData.getGe());
         }
 

@@ -46,11 +46,11 @@
                         password="${jdbc.password}">
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="model" targetProject="src/main/java/cn/ananyz/cp/service"/>
+        <javaModelGenerator targetPackage="cn.ananyz.cp.service.model" targetProject="src/main/java"/>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
 
-        <javaClientGenerator targetPackage="dao" targetProject="src/main/java/cn/ananyz/cp/service"
+        <javaClientGenerator targetPackage="cn.ananyz.cp.service.mapper" targetProject="src/main/java"
                              type="XMLMAPPER"/>
 
         <!--<table tableName="%">
@@ -62,8 +62,9 @@
         <!--<table tableName="hive_cube_info">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>-->
-        <!--<table tableName="field_info">
+        <table tableName="cp_data_result">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-        </table>-->
+        </table>
+
     </context>
 </generatorConfiguration>

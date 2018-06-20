@@ -21,9 +21,12 @@ public class DateUtil {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.format(date);
     }
+
     public static Date parseDate(String date,String pattern) throws ParseException {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         return simpleDateFormat.parse(date);
     }
+
+
 
 }

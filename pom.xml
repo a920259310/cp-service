@@ -293,7 +293,6 @@
                 <groupId>javax.mail</groupId>
                 <artifactId>mail</artifactId>
                 <version>${mail.version}</version>
-
             </dependency>
 
         </dependencies>

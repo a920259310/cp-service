@@ -1,5 +1,6 @@
 package cn.ananyz.cp.service.schedule;
 
+import cn.ananyz.cp.service.controller.CpDataResultController;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
 import cn.ananyz.cp.service.model.CpData;
@@ -20,6 +21,8 @@ public class ScheduleComment {
     private CpApi cpApi;
     @Autowired
     private AnalysisEngineService analysisEngineService;
+
+
 
     public void queryCpData() throws Exception {
         CPDataModel todayLastData = cpApi.getTodayLastData(new Date());
@@ -50,4 +53,6 @@ public class ScheduleComment {
         cpData.setGe(todayLastData.getGe());
         return cpData;
     }
+
+
 }

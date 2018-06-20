@@ -40,8 +40,10 @@
     <context:property-placeholder ignore-unresolvable="true" location="classpath:config.properties"/>
 
     <context:component-scan base-package="cn.ananyz.cp.service.service" />
+    <context:component-scan base-package="cn.ananyz.cp.service.controller" />
     <context:component-scan base-package="cn.ananyz.cp.service.data.collection" />
     <context:component-scan base-package="cn.ananyz.cp.service.mail" />
+    <context:component-scan base-package="cn.ananyz.cp.service.listener" />
 
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClass}"/>
@@ -135,6 +137,33 @@
         <property name="port" value="25"></property>
         <property name="username" value="lian920259310@163.com"></property>
         <property name="password" value="f19931006"></property>
+    </bean>
+
+    <bean id="mailConfig" class="cn.ananyz.cp.service.mail.MailConfig" >
+        <property name="from" value="lian920259310@163.com"></property>
+        <property name="subject" value="小游戏"></property>
+        <property name="text" value="告警提示:"></property>
+        <property name="to">
+            <list>
+                <value>920259310@qq.com</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cpDataResultConfig" class="cn.ananyz.cp.service.config.CpDataResultConfig">
+        <property name="start" value="0"></property>
+        <property name="end" value="7"></property>
+        <property name="diffNum" value="5"></property>
+        <property name="listIndex">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+                <value>5</value>
+            </list>
+        </property>
+
     </bean>
 
 

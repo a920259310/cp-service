@@ -6,11 +6,14 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by 王晶 on 2018/6/10.
  */
 @Component
 public class MailServiceImpl implements MailService {
+
     @Autowired
     private JavaMailSenderImpl javaMailSender;
 
@@ -21,6 +24,18 @@ public class MailServiceImpl implements MailService {
         message.setSubject(subject);//主题
         message.setText(text);//正文
         javaMailSender.send(message);
-        return true;
+        return Boolean.TRUE;
     }
+
+    @Override
+    public Boolean sendMorePerson(String from, List<String> tos, String subject, String text) {
+
+        for(String to : tos){
+            send(from,to,subject,text);
+        }
+
+        return Boolean.TRUE;
+    }
+
+
 }

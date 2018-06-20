@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ananyz.cp.service.mapper.CpDataResultMapper" >
+  <resultMap id="BaseResultMap" type="cn.ananyz.cp.service.model.CpDataResult" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cp_date" property="cpDate" jdbcType="VARCHAR" />
+    <result column="cp_qi_hao" property="cpQiHao" jdbcType="VARCHAR" />
+    <result column="cp_index" property="cpIndex" jdbcType="CHAR" />
+    <result column="cp_num" property="cpNum" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <select id="selectLimit" resultMap="BaseResultMap">
+    SELECT
+      *
+    FROM cp_data_result
+    WHERE cp_index = #{cpIndex}
+    ORDER BY cp_date DESC,cp_qi_hao DESC LIMIT #{start},#{end}
+  </select>
+
+</mapper>
