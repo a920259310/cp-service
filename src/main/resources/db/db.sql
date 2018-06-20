@@ -1,8 +1,8 @@
 /*
 SQLyog Ultimate v12.09 (64 bit)
-MySQL - 5.7.22-log : Database - cp
+MySQL - 5.7.20-log : Database - cp
 *********************************************************************
-*/
+*/
 
 /*!40101 SET NAMES utf8 */;
 
@@ -33,9 +33,19 @@ CREATE TABLE `cp_data` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table `cp_data` */
+/*Table structure for table `cp_data_result` */
 
-insert  into `cp_data`(`id`,`cp_date`,`cp_qi_hao`,`wan`,`qian`,`bai`,`shi`,`ge`,`create_time`) values ('54d28ea13556493a92aad0a68f1c0da8','2018-06-10',117,2,1,8,9,9,'2018-06-10 23:46:43'),('848803c4facb49309da4050130ea8207','2018-06-10',118,1,0,0,0,2,'2018-06-10 23:52:25'),('87b41772bab5492a8306408153b78367','2018-06-10',116,7,3,3,9,2,'2018-06-10 23:41:20'),('994561a4ad754d4d98995327bb7e667e','2018-06-10',115,0,0,6,0,6,'2018-06-10 23:40:20');
+DROP TABLE IF EXISTS `cp_data_result`;
+
+CREATE TABLE `cp_data_result` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `cp_date` varchar(10) DEFAULT NULL COMMENT '日期',
+  `cp_qi_hao` varchar(3) DEFAULT NULL COMMENT '期号',
+  `cp_index` enum('1','2','3','4','5') DEFAULT NULL COMMENT '位置',
+  `cp_num` enum('0','1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '号码',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_parity_analysis` */
 
@@ -49,11 +59,7 @@ CREATE TABLE `cp_parity_analysis` (
   `batch_num` bigint(20) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8;
-
-/*Data for the table `cp_parity_analysis` */
-
-insert  into `cp_parity_analysis`(`id`,`cp_data_id`,`parity`,`index_num`,`batch_num`,`create_time`) values (141,'994561a4ad754d4d98995327bb7e667e',0,'1',1,'2018-06-10 23:40:21'),(142,'994561a4ad754d4d98995327bb7e667e',0,'2',1,'2018-06-10 23:40:21'),(143,'994561a4ad754d4d98995327bb7e667e',0,'3',1,'2018-06-10 23:40:21'),(144,'994561a4ad754d4d98995327bb7e667e',0,'4',1,'2018-06-10 23:40:21'),(145,'994561a4ad754d4d98995327bb7e667e',0,'5',1,'2018-06-10 23:40:21'),(146,'87b41772bab5492a8306408153b78367',1,'1',2,'2018-06-10 23:41:20'),(147,'87b41772bab5492a8306408153b78367',1,'2',2,'2018-06-10 23:41:20'),(148,'87b41772bab5492a8306408153b78367',1,'3',2,'2018-06-10 23:41:20'),(149,'87b41772bab5492a8306408153b78367',1,'4',2,'2018-06-10 23:41:20'),(150,'87b41772bab5492a8306408153b78367',0,'5',1,'2018-06-10 23:41:20'),(151,'54d28ea13556493a92aad0a68f1c0da8',0,'1',3,'2018-06-10 23:47:33'),(152,'54d28ea13556493a92aad0a68f1c0da8',1,'2',2,'2018-06-10 23:47:33'),(153,'54d28ea13556493a92aad0a68f1c0da8',0,'3',3,'2018-06-10 23:47:33'),(154,'54d28ea13556493a92aad0a68f1c0da8',1,'4',2,'2018-06-10 23:47:33'),(155,'54d28ea13556493a92aad0a68f1c0da8',1,'5',2,'2018-06-10 23:47:33'),(156,'848803c4facb49309da4050130ea8207',1,'1',4,'2018-06-10 23:53:02'),(157,'848803c4facb49309da4050130ea8207',0,'2',3,'2018-06-10 23:53:02'),(158,'848803c4facb49309da4050130ea8207',0,'3',3,'2018-06-10 23:53:02'),(159,'848803c4facb49309da4050130ea8207',0,'4',3,'2018-06-10 23:53:02'),(160,'848803c4facb49309da4050130ea8207',0,'5',3,'2018-06-10 23:53:02');
+) ENGINE=InnoDB AUTO_INCREMENT=3726 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
