@@ -5,10 +5,10 @@ import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
 import cn.ananyz.cp.service.model.CpDataResult;
 import cn.ananyz.cp.service.service.CpDataResultService;
+import cn.ananyz.cp.service.service.CpDataResultViewsService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -24,7 +24,8 @@ public class CpDataResultController {
     @Autowired
     private CpDataResultConfig cpDataResultConfig;
 
-    static ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+    @Autowired
+    private CpDataResultViewsService cpDataResultViewsService;
 
     /**
      * 初始化今天的号码
@@ -41,6 +42,8 @@ public class CpDataResultController {
         });
         for(CPDataModel cpDataModel : todayAllData){
             convertCpApiToCpDataResult(cpDataModel);
+            List<CpDataResultView> analyzi = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(), cpDataResultConfig.getDiffNum());
+            cpDataResultViewsService.insert(analyzi);
         }
     }
 
@@ -62,6 +65,7 @@ public class CpDataResultController {
      */
     public void analyz() throws IOException, ParseException {
         List<CpDataResultView> cpDataResultViews = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(),cpDataResultConfig.getDiffNum());
+        cpDataResultViewsService.insert(cpDataResultViews);
         cpDataResultService.sendMails(cpDataResultViews);
     }
 
@@ -104,22 +108,5 @@ public class CpDataResultController {
         cpDataResultService.insert(cpDataResult);
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
-        CpDataResultController bean = classPathXmlApplicationContext.getBean(CpDataResultController.class);
 
-//        bean.initToday();
-        CpDataResultService bean1 = classPathXmlApplicationContext.getBean(CpDataResultService.class);
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("1");
-        strings.add("2");
-        strings.add("3");
-        strings.add("4");
-        strings.add("5");
-        //[CpDataResultView{cpIndex='2', endQihao='083', startQihao='077', cruHaoMa='6', createTime=Wed Jun 20 19:53:19 CST 2018, cishu=7, yichu=[0, 1, 2, 3, 6], weichu=[4, 5, 7, 8, 9]}]
-        List<CpDataResultView> analyzi = bean1.analyzi(strings,0,7,5);
-
-        bean1.sendMails(analyzi);
-        System.out.println(analyzi);
-
-    }
 }

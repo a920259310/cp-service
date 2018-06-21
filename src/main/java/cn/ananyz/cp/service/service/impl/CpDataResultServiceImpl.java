@@ -66,34 +66,38 @@ public class CpDataResultServiceImpl implements CpDataResultService {
 
         for(String cpIndex : listIndex){
             List<CpDataResult> cpDataResults = cpDataResultMapper.selectLimit(cpIndex, start, end);
-            Set<String> setNum = new HashSet<String>();
 
-            for(CpDataResult cpDataResult : cpDataResults){
-                setNum.add(cpDataResult.getCpNum());
-            }
+            if(cpDataResults != null && cpDataResults.size() >= end){
+                Set<String> setNum = new HashSet<String>();
 
-            if(setNum.size() <= diffNum){  //七期之内 出了小于五种号
-                ivalidataHaoMa(cpDataResults, setNum,diffNum);
+                for(CpDataResult cpDataResult : cpDataResults){
+                    setNum.add(cpDataResult.getCpNum());
+                }
 
-                CpDataResult remove = cpDataResults.remove(cpDataResults.size() - 1);
-                CpDataResultView cpDataResultView = new CpDataResultView();
+                if(setNum.size() <= diffNum){  //七期之内 出了小于五种号
 
-                cpDataResultView.setCpIndex(cpIndex);
-                cpDataResultView.setStartQihao(cpDataResults.get(cpDataResults.size() - 1).getCpQiHao());
-                cpDataResultView.setEndQihao(cpDataResults.get(0).getCpQiHao());
-                cpDataResultView.setCruHaoMa(cpDataResults.get(0).getCpNum());
-                cpDataResultView.setCreateTime(cpDataResults.get(0).getCreateTime());
-                cpDataResultView.setCishu(cpDataResults.size());
+                    ivalidataHaoMa(cpDataResults, setNum,diffNum);
 
-                Set<String> collect = cpDataResults.stream().map(x -> {
-                    return x.getCpNum();
-                }).collect(Collectors.toSet());
+                    CpDataResult remove = cpDataResults.remove(cpDataResults.size() - 1);
+                    CpDataResultView cpDataResultView = new CpDataResultView();
 
-                cpDataResultView.setYichu(new ArrayList<>(collect));
-                Set<String> allNum = Constance.getAllNum();
-                allNum.removeAll(collect);
-                cpDataResultView.setWeichu(new ArrayList<>(allNum));
-                list.add(cpDataResultView);
+                    cpDataResultView.setCpIndex(cpIndex);
+                    cpDataResultView.setStartQihao(cpDataResults.get((cpDataResults.size() - 1)).getCpQiHao());
+                    cpDataResultView.setEndQihao(cpDataResults.get(0).getCpQiHao());
+                    cpDataResultView.setCruHaoMa(cpDataResults.get(0).getCpNum());
+                    cpDataResultView.setCreateTime(cpDataResults.get(0).getCreateTime());
+                    cpDataResultView.setCishu(cpDataResults.size());
+
+                    Set<String> collect = cpDataResults.stream().map(x -> {
+                        return x.getCpNum();
+                    }).collect(Collectors.toSet());
+
+                    cpDataResultView.setYichu(new ArrayList<>(collect));
+                    Set<String> allNum = Constance.getAllNum();
+                    allNum.removeAll(collect);
+                    cpDataResultView.setWeichu(new ArrayList<>(allNum));
+                    list.add(cpDataResultView);
+                }
             }
         }
 
@@ -158,8 +162,9 @@ public class CpDataResultServiceImpl implements CpDataResultService {
         cpDataResultCondition.setCpQiHao(NumUtil.converIntToStringNum(i));
         if(i < 1){
             cpDataResultCondition.setCpQiHao("120");
-            cpDataResultCondition.setCpDate(DateUtil.formatDate(new Date(DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - 24 * 60 * 60 * 1000),DateUtil.PATTERN_DATE));
+            cpDataResultCondition.setCpDate(DateUtil.formatDate(new Date(cpDataResult.getCreateTime().getTime() - 24 * 60 * 60 * 1000),DateUtil.PATTERN_DATE));
         }
+        System.out.println();
         CpDataResult cpDataResultSelect = cpDataResultMapper.selectOne(cpDataResultCondition);
 
         if(cpDataResultSelect != null){

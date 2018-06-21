@@ -62,7 +62,7 @@
         <!--<table tableName="hive_cube_info">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>-->
-        <table tableName="cp_data_result">
+        <table tableName="cp_data_result_views">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
