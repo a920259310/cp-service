@@ -45,7 +45,25 @@ CREATE TABLE `cp_data_result` (
   `cp_num` enum('0','1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=451 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1841 DEFAULT CHARSET=utf8;
+
+/*Table structure for table `cp_data_result_views` */
+
+DROP TABLE IF EXISTS `cp_data_result_views`;
+
+CREATE TABLE `cp_data_result_views` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `cp_index` enum('1','2','3','4','5') DEFAULT NULL COMMENT '角标',
+  `end_qi_hao` varchar(3) DEFAULT NULL COMMENT '结束期号',
+  `start_qi_hao` varchar(3) DEFAULT NULL COMMENT '开始期号',
+  `cru_hao_ma` varchar(1) DEFAULT NULL COMMENT '当前号码',
+  `cishu` int(3) DEFAULT NULL COMMENT '次数',
+  `yichu` varchar(32) DEFAULT NULL COMMENT '已出号码',
+  `weichu` varchar(32) DEFAULT NULL COMMENT '未出号码',
+  `create_time` timestamp NULL DEFAULT NULL COMMENT '采集时间',
+  `create_date` date DEFAULT NULL COMMENT '采集日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=710 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_parity_analysis` */
 
@@ -59,7 +77,7 @@ CREATE TABLE `cp_parity_analysis` (
   `batch_num` bigint(20) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3726 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4291 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
