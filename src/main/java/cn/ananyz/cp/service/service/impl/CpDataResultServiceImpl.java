@@ -9,6 +9,7 @@ import cn.ananyz.cp.service.service.CpDataResultService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.utils.NumUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class CpDataResultServiceImpl implements CpDataResultService {
-
+    private static Logger logger = Logger.getLogger(CpDataResultServiceImpl.class);
     @Autowired
     private CpDataResultMapper cpDataResultMapper;
 
@@ -160,11 +161,15 @@ public class CpDataResultServiceImpl implements CpDataResultService {
         cpDataResultCondition.setCpIndex(cpDataResult.getCpIndex());
         cpDataResultCondition.setCpDate(cpDataResult.getCpDate());
         cpDataResultCondition.setCpQiHao(NumUtil.converIntToStringNum(i));
+
         if(i < 1){
             cpDataResultCondition.setCpQiHao("120");
-            cpDataResultCondition.setCpDate(DateUtil.formatDate(new Date(cpDataResult.getCreateTime().getTime() - 24 * 60 * 60 * 1000),DateUtil.PATTERN_DATE));
         }
-        System.out.println();
+        if(i == 119){
+            cpDataResultCondition.setCpDate(DateUtil.formatDate(new Date(cpDataResult.getCreateTime().getTime() - (24 * 60 * 60 * 1000)),DateUtil.PATTERN_DATE));
+        }
+
+        logger.info("上一期的查询参数.......cpDataResultCondition:" + cpDataResultCondition.toString());
         CpDataResult cpDataResultSelect = cpDataResultMapper.selectOne(cpDataResultCondition);
 
         if(cpDataResultSelect != null){

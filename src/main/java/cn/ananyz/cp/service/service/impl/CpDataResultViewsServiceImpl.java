@@ -14,8 +14,6 @@ public class CpDataResultViewsServiceImpl implements CpDataResultViewsService {
     @Autowired
     private CpDataResultViewsMapper cpDataResultViewsMapper;
 
-//    private Gson gson = new Gson();
-
     @Override
     public int insert(CpDataResultView cpDataResultView) {
         CpDataResultViews cpDataResultViewsCondition = new CpDataResultViews();
