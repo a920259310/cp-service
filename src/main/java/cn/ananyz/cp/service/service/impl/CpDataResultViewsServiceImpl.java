@@ -18,10 +18,12 @@ public class CpDataResultViewsServiceImpl implements CpDataResultViewsService {
     public int insert(CpDataResultView cpDataResultView) {
         CpDataResultViews cpDataResultViewsCondition = new CpDataResultViews();
 
-        cpDataResultViewsCondition.setCreateDate(cpDataResultView.getCreateTime());
         cpDataResultViewsCondition.setStartQiHao(cpDataResultView.getStartQihao());
         cpDataResultViewsCondition.setEndQiHao(cpDataResultView.getEndQihao());
         cpDataResultViewsCondition.setCpIndex(cpDataResultView.getCpIndex());
+        cpDataResultViewsCondition.setCishu(cpDataResultView.getCishu());
+        cpDataResultViewsCondition.setStartQiDate(cpDataResultView.getStartQiDate());
+        cpDataResultViewsCondition.setEndQiDate(cpDataResultView.getEndQiDate());
 
         List<CpDataResultViews> select = cpDataResultViewsMapper.select(cpDataResultViewsCondition);
 
@@ -36,9 +38,9 @@ public class CpDataResultViewsServiceImpl implements CpDataResultViewsService {
         cpDataResultViews.setStartQiHao(cpDataResultView.getStartQihao());
         cpDataResultViews.setCruHaoMa(cpDataResultView.getCruHaoMa());
         cpDataResultViews.setCreateTime(cpDataResultView.getCreateTime());
-        cpDataResultViews.setCreateDate(cpDataResultView.getCreateTime());
-
+        cpDataResultViews.setCreateDate(cpDataResultView.getCreateDate());
         cpDataResultViews.setCishu(cpDataResultView.getCishu());
+
 
         String[] stringsYichuList = new String[cpDataResultView.getYichu().size()];
         String[] stringsYichuA = cpDataResultView.getYichu().toArray(stringsYichuList);
@@ -48,6 +50,9 @@ public class CpDataResultViewsServiceImpl implements CpDataResultViewsService {
         String[] stringsWeichuList = new String[cpDataResultView.getWeichu().size()];
         String[] stringsWeichu = cpDataResultView.getWeichu().toArray(stringsWeichuList);
         cpDataResultViews.setWeichu(Arrays.toString(stringsWeichu));
+
+        cpDataResultViews.setStartQiDate(cpDataResultView.getStartQiDate());
+        cpDataResultViews.setEndQiDate(cpDataResultView.getEndQiDate());
 
         return cpDataResultViewsMapper.insert(cpDataResultViews);
 

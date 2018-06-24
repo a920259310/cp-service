@@ -64,6 +64,18 @@ public class CpDataResultViews {
     private Date createDate;
 
     /**
+     * 开始期号开奖日期
+     */
+    @Column(name = "start_qi_date")
+    private Date startQiDate;
+
+    /**
+     * 结束期号开奖日期
+     */
+    @Column(name = "end_qi_date")
+    private Date endQiDate;
+
+    /**
      * 获取主键
      *
      * @return id - 主键
@@ -241,5 +253,41 @@ public class CpDataResultViews {
      */
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    /**
+     * 获取开始期号开奖日期
+     *
+     * @return start_qi_date - 开始期号开奖日期
+     */
+    public Date getStartQiDate() {
+        return startQiDate;
+    }
+
+    /**
+     * 设置开始期号开奖日期
+     *
+     * @param startQiDate 开始期号开奖日期
+     */
+    public void setStartQiDate(Date startQiDate) {
+        this.startQiDate = startQiDate;
+    }
+
+    /**
+     * 获取结束期号开奖日期
+     *
+     * @return end_qi_date - 结束期号开奖日期
+     */
+    public Date getEndQiDate() {
+        return endQiDate;
+    }
+
+    /**
+     * 设置结束期号开奖日期
+     *
+     * @param endQiDate 结束期号开奖日期
+     */
+    public void setEndQiDate(Date endQiDate) {
+        this.endQiDate = endQiDate;
     }
 }

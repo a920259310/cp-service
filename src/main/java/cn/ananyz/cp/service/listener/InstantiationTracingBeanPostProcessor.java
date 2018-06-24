@@ -17,6 +17,7 @@ public class InstantiationTracingBeanPostProcessor implements ApplicationListene
     public void onApplicationEvent(ContextRefreshedEvent event) {
         try {
             cpDataResultController.initToday();
+//            cpDataResultController.initAllCpData();
             System.out.println("初始化方法运行了.............");
         } catch (IOException e) {
             e.printStackTrace();

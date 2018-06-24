@@ -34,12 +34,41 @@ public class CpDataResultController {
      */
     public void initToday() throws IOException, ParseException {
         List<CPDataModel> todayAllData = cpApi.getTodayAllData(new Date());
+        insertCpDatas(todayAllData);
+
+    }
+
+    /**
+     * 批量插入cp数据
+     */
+    public void initAllCpData() throws ParseException, IOException {
+        int day = 7;
+        Date add = DateUtil.add(new Date(), Calendar.DAY_OF_MONTH, -day);
+        for(int i = 0 ; i < day ; i++){
+            Date add2 = DateUtil.add(add, Calendar.DAY_OF_MONTH, i+1);
+            System.out.println(DateUtil.formatDate(add2,DateUtil.PATTERN_DATE_TIME));
+            List<CPDataModel> todayAllData = cpApi.getTodayAllData(add2);
+            insertCpDatas(todayAllData);
+        }
+    }
+
+//    public static void main(String[] args) throws ParseException {
+//        initAllCpData();
+//    }
+
+    /**
+     * 批量排序插入数据并分析
+     * @param todayAllData
+     * @throws ParseException
+     */
+    private void insertCpDatas(List<CPDataModel> todayAllData) throws ParseException {
         Collections.sort(todayAllData, new Comparator<CPDataModel>() {
             @Override
             public int compare(CPDataModel o1, CPDataModel o2) {
                 return o1.getLongDateAndQiHao().compareTo(o2.getLongDateAndQiHao());
             }
         });
+
         for(CPDataModel cpDataModel : todayAllData){
             convertCpApiToCpDataResult(cpDataModel);
             List<CpDataResultView> analyzi = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(), cpDataResultConfig.getDiffNum());

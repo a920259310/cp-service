@@ -86,7 +86,8 @@ public class CpDataResultServiceImpl implements CpDataResultService {
                     cpDataResultView.setStartQihao(cpDataResults.get((cpDataResults.size() - 1)).getCpQiHao());
                     cpDataResultView.setEndQihao(cpDataResults.get(0).getCpQiHao());
                     cpDataResultView.setCruHaoMa(cpDataResults.get(0).getCpNum());
-                    cpDataResultView.setCreateTime(cpDataResults.get(0).getCreateTime());
+                    cpDataResultView.setCreateTime(new Date());
+                    cpDataResultView.setCreateDate(new Date());
                     cpDataResultView.setCishu(cpDataResults.size());
 
                     Set<String> collect = cpDataResults.stream().map(x -> {
@@ -97,6 +98,10 @@ public class CpDataResultServiceImpl implements CpDataResultService {
                     Set<String> allNum = Constance.getAllNum();
                     allNum.removeAll(collect);
                     cpDataResultView.setWeichu(new ArrayList<>(allNum));
+
+                    cpDataResultView.setStartQiDate(DateUtil.parseDate(cpDataResults.get(cpDataResults.size() - 1).getCpDate(),DateUtil.PATTERN_DATE));
+                    cpDataResultView.setEndQiDate(DateUtil.parseDate(cpDataResults.get(0).getCpDate(),DateUtil.PATTERN_DATE));
+
                     list.add(cpDataResultView);
                 }
             }
@@ -166,7 +171,11 @@ public class CpDataResultServiceImpl implements CpDataResultService {
             cpDataResultCondition.setCpQiHao("120");
         }
         if(i == 119){
-            cpDataResultCondition.setCpDate(DateUtil.formatDate(new Date(cpDataResult.getCreateTime().getTime() - (24 * 60 * 60 * 1000)),DateUtil.PATTERN_DATE));
+            cpDataResultCondition.setCpDate(
+                    DateUtil.formatDate(
+                            new Date(
+                                    DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - (24 * 60 * 60 * 1000)),
+                            DateUtil.PATTERN_DATE));
         }
 
         logger.info("上一期的查询参数.......cpDataResultCondition:" + cpDataResultCondition.toString());

@@ -15,5 +15,7 @@
     <result column="weichu" jdbcType="VARCHAR" property="weichu" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="start_qi_date" jdbcType="DATE" property="startQiDate" />
+    <result column="end_qi_date" jdbcType="DATE" property="endQiDate" />
   </resultMap>
 </mapper>

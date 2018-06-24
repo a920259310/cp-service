@@ -27,6 +27,17 @@ public class DateUtil {
         return simpleDateFormat.parse(date);
     }
 
+    public static Date add(Date date,int ymd,int amout) throws ParseException {
+        Calendar rightNow = Calendar.getInstance();
+        rightNow.setTime(date);
+        rightNow.add(ymd,amout);
+        Date rightNowTime = rightNow.getTime();
+        return rightNowTime;
+    }
 
+    public static void main(String[] args) throws ParseException {
+        Date add = add(new Date(), Calendar.DAY_OF_MONTH, -10);
+        System.out.println(formatDate(add,PATTERN_DATE_TIME));
+    }
 
 }
