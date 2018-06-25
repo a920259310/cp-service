@@ -3,6 +3,7 @@ package cn.ananyz.cp.service.controller;
 import cn.ananyz.cp.service.config.CpDataResultConfig;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
+import cn.ananyz.cp.service.data.collection.parse.impl.CpApi163;
 import cn.ananyz.cp.service.model.CpDataResult;
 import cn.ananyz.cp.service.service.CpDataResultService;
 import cn.ananyz.cp.service.service.CpDataResultViewsService;
@@ -33,6 +34,7 @@ public class CpDataResultController {
      * @throws ParseException
      */
     public void initToday() throws IOException, ParseException {
+
         List<CPDataModel> todayAllData = cpApi.getTodayAllData(new Date());
         insertCpDatas(todayAllData);
 
@@ -42,7 +44,7 @@ public class CpDataResultController {
      * 批量插入cp数据
      */
     public void initAllCpData() throws ParseException, IOException {
-        int day = 7;
+        int day = 2;
         Date add = DateUtil.add(new Date(), Calendar.DAY_OF_MONTH, -day);
         for(int i = 0 ; i < day ; i++){
             Date add2 = DateUtil.add(add, Calendar.DAY_OF_MONTH, i+1);
@@ -82,11 +84,17 @@ public class CpDataResultController {
      * @throws ParseException
      */
     public void selectCruNum() throws IOException, ParseException {
-
-        CPDataModel todayLastData = cpApi.getTodayLastData(new Date());
+        Date add = DateUtil.add(new Date(), Calendar.MINUTE, -3);
+        CPDataModel todayLastData = cpApi.getTodayLastData(add);
         convertCpApiToCpDataResult(todayLastData);
     }
 
+    public static void main(String[] args) throws IOException {
+        CpApi cpApi1 = new CpApi163();
+        System.out.println(DateUtil.formatDate(new Date(),DateUtil.PATTERN_DATE));
+        CPDataModel todayLastData = cpApi1.getTodayLastData(new Date());
+        System.out.println(todayLastData);
+    }
     /**
      * 分析结果号码
      * @throws IOException
