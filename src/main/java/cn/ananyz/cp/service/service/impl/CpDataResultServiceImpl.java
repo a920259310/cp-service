@@ -169,14 +169,19 @@ public class CpDataResultServiceImpl implements CpDataResultService {
 
         if(i < 1){
             cpDataResultCondition.setCpQiHao("120");
-        }
-        if(i == 119){
             cpDataResultCondition.setCpDate(
                     DateUtil.formatDate(
                             new Date(
                                     DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - (24 * 60 * 60 * 1000)),
                             DateUtil.PATTERN_DATE));
         }
+//        if(i == 119){
+//            cpDataResultCondition.setCpDate(
+//                    DateUtil.formatDate(
+//                            new Date(
+//                                    DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - (24 * 60 * 60 * 1000)),
+//                            DateUtil.PATTERN_DATE));
+//        }
 
         logger.info("上一期的查询参数.......cpDataResultCondition:" + cpDataResultCondition.toString());
         CpDataResult cpDataResultSelect = cpDataResultMapper.selectOne(cpDataResultCondition);
