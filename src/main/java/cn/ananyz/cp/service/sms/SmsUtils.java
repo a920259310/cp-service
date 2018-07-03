@@ -1,4 +1,4 @@
-package cn.ananyz.cp.service;
+package cn.ananyz.cp.service.sms;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -8,7 +8,7 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class SmsSample {
+public class SmsUtils {
 
 	public static void main(String[] args) {
 
@@ -16,18 +16,24 @@ public class SmsSample {
 		String testPassword = "a19931006"; //在短信宝注册的密码
 		String testPhone = "18520767259";
 		String testContent = "【万千购】您的验证码是1234,５分钟内有效。若非本人操作请忽略此消息。"; // 注意测试时，也请带上公司简称或网站签名，发送正规内容短信。千万不要发送无意义的内容：例如 测一下、您好。否则可能会收不到
-
 		String httpUrl = "http://api.smsbao.com/sms";
 
+
+		StringBuffer httpArg = getStringBuffer(testUsername, testPassword, testPhone, testContent);
+		String result = request(httpUrl, httpArg.toString());
+
+		System.out.println(result);
+	}
+
+	public static StringBuffer getStringBuffer(String testUsername, String testPassword, String testPhone, String testContent) {
 		StringBuffer httpArg = new StringBuffer();
 		httpArg.append("u=").append(testUsername).append("&");
 		httpArg.append("p=").append(md5(testPassword)).append("&");
 		httpArg.append("m=").append(testPhone).append("&");
 		httpArg.append("c=").append(encodeUrlString(testContent, "UTF-8"));
-
-		String result = request(httpUrl, httpArg.toString());
-		System.out.println(result);
+		return httpArg;
 	}
+
 
 	public static String request(String httpUrl, String httpArg) {
 		BufferedReader reader = null;
