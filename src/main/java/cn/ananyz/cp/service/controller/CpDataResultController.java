@@ -7,17 +7,21 @@ import cn.ananyz.cp.service.data.collection.parse.impl.CpApi163;
 import cn.ananyz.cp.service.model.CpDataResult;
 import cn.ananyz.cp.service.service.CpDataResultService;
 import cn.ananyz.cp.service.service.CpDataResultViewsService;
+import cn.ananyz.cp.service.service.impl.CpDataResultServiceImpl;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Component
 public class CpDataResultController {
+    private static Logger logger = Logger.getLogger(CpDataResultController.class);
     @Autowired
     private CpApi cpApi;
     @Autowired
@@ -103,7 +107,16 @@ public class CpDataResultController {
     public void analyz() throws IOException, ParseException {
         List<CpDataResultView> cpDataResultViews = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(),cpDataResultConfig.getDiffNum());
         cpDataResultViewsService.insert(cpDataResultViews);
-        cpDataResultService.sendMails(cpDataResultViews);
+
+        logger.info("分析出的号....:" + cpDataResultViews);
+
+        List<CpDataResultView> collect = cpDataResultViews.stream().filter(x -> {
+            return x.getCishu() > 9;
+        }).collect(Collectors.toList());
+
+        logger.info("邮件预警号....:" + collect);
+
+        cpDataResultService.sendMails(collect);
     }
 
 
