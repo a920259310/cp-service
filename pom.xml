@@ -47,14 +47,31 @@
     </properties>
 
         <dependencies>
+
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>4.5.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient-cache</artifactId>
+                <version>4.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>4.3.2</version>
+            </dependency>
+
+
+
             <!-- 阿里的json工具包 -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>1.2.7</version>
             </dependency>
-
-
 
             <dependency>
                 <groupId>org.jsoup</groupId>
