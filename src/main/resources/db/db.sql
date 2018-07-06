@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.09 (64 bit)
-MySQL - 5.7.20-log : Database - cp
+MySQL - 5.7.22-log : Database - cp
 *********************************************************************
 */
 
@@ -45,7 +45,7 @@ CREATE TABLE `cp_data_result` (
   `cp_num` enum('0','1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1841 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10526 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_views` */
 
@@ -62,8 +62,10 @@ CREATE TABLE `cp_data_result_views` (
   `weichu` varchar(32) DEFAULT NULL COMMENT '未出号码',
   `create_time` timestamp NULL DEFAULT NULL COMMENT '采集时间',
   `create_date` date DEFAULT NULL COMMENT '采集日期',
+  `start_qi_date` date DEFAULT NULL COMMENT '开始期号开奖日期',
+  `end_qi_date` date DEFAULT NULL COMMENT '结束期号开奖日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=710 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6569 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_parity_analysis` */
 
@@ -77,7 +79,7 @@ CREATE TABLE `cp_parity_analysis` (
   `batch_num` bigint(20) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4291 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7261 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
