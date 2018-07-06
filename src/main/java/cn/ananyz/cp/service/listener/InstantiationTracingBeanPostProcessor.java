@@ -15,14 +15,14 @@ public class InstantiationTracingBeanPostProcessor implements ApplicationListene
     CpDataResultController cpDataResultController;
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        try {
-            cpDataResultController.initToday();
-//            cpDataResultController.initAllCpData();
-            System.out.println("初始化方法运行了.............");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            cpDataResultController.initToday();
+////            cpDataResultController.initAllCpData();
+//            System.out.println("初始化方法运行了.............");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 }

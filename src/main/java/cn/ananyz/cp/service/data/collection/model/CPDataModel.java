@@ -1,5 +1,7 @@
 package cn.ananyz.cp.service.data.collection.model;
 
+import java.util.Date;
+
 /**
  * Created by 王晶 on 2018/6/3.
  */
@@ -11,6 +13,9 @@ public class CPDataModel {
     private int ge;
     private String longDateAndQiHao;
     private String shortQiHao;
+    private Date openTime;
+
+
 
     public int getWan() {
         return wan;
@@ -68,6 +73,14 @@ public class CPDataModel {
         this.longDateAndQiHao = longDateAndQiHao;
     }
 
+    public Date getOpenTime() {
+        return openTime;
+    }
+
+    public void setOpenTime(Date openTime) {
+        this.openTime = openTime;
+    }
+
     @Override
     public String toString() {
         return "CPDataModel{" +
@@ -78,6 +91,7 @@ public class CPDataModel {
                 ", ge=" + ge +
                 ", longDateAndQiHao='" + longDateAndQiHao + '\'' +
                 ", shortQiHao='" + shortQiHao + '\'' +
+                ", openTime=" + openTime +
                 '}';
     }
 }

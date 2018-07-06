@@ -3,11 +3,11 @@ package cn.ananyz.cp.service.controller;
 import cn.ananyz.cp.service.config.CpDataResultConfig;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
-import cn.ananyz.cp.service.data.collection.parse.impl.CpApi163;
+import cn.ananyz.cp.service.data.collection.parse.CpApi163;
+import cn.ananyz.cp.service.data.collection.parse.impl.CpApi163Impl;
 import cn.ananyz.cp.service.model.CpDataResult;
 import cn.ananyz.cp.service.service.CpDataResultService;
 import cn.ananyz.cp.service.service.CpDataResultViewsService;
-import cn.ananyz.cp.service.service.impl.CpDataResultServiceImpl;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
 import org.apache.log4j.Logger;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class CpDataResultController {
     private static Logger logger = Logger.getLogger(CpDataResultController.class);
     @Autowired
-    private CpApi cpApi;
+    private CpApi163 cpApi163;
     @Autowired
     private CpDataResultService cpDataResultService;
     @Autowired
@@ -39,7 +39,7 @@ public class CpDataResultController {
      */
     public void initToday() throws IOException, ParseException {
 
-        List<CPDataModel> todayAllData = cpApi.getTodayAllData(new Date());
+        List<CPDataModel> todayAllData = cpApi163.getTodayAllData(new Date());
         insertCpDatas(todayAllData);
 
     }
@@ -53,7 +53,7 @@ public class CpDataResultController {
         for(int i = 0 ; i < day ; i++){
             Date add2 = DateUtil.add(add, Calendar.DAY_OF_MONTH, i+1);
             System.out.println(DateUtil.formatDate(add2,DateUtil.PATTERN_DATE_TIME));
-            List<CPDataModel> todayAllData = cpApi.getTodayAllData(add2);
+            List<CPDataModel> todayAllData = cpApi163.getTodayAllData(add2);
             insertCpDatas(todayAllData);
         }
     }
@@ -89,12 +89,12 @@ public class CpDataResultController {
      */
     public void selectCruNum() throws IOException, ParseException {
         Date add = DateUtil.add(new Date(), Calendar.MINUTE, -3);
-        CPDataModel todayLastData = cpApi.getTodayLastData(add);
+        CPDataModel todayLastData = cpApi163.getTodayLastData(add);
         convertCpApiToCpDataResult(todayLastData);
     }
 
-    public static void main(String[] args) throws IOException {
-        CpApi cpApi1 = new CpApi163();
+    public static void main(String[] args) throws IOException, ParseException {
+        CpApi cpApi1 = new CpApi163Impl();
         System.out.println(DateUtil.formatDate(new Date(),DateUtil.PATTERN_DATE));
         CPDataModel todayLastData = cpApi1.getTodayLastData(new Date());
         System.out.println(todayLastData);
