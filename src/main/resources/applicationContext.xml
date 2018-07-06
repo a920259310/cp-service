@@ -163,9 +163,7 @@
                 <value>5</value>
             </list>
         </property>
-
     </bean>
-
 
     <import resource="spring-schedule.xml"></import>
 
