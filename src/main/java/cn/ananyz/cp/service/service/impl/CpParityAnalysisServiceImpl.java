@@ -1,6 +1,7 @@
 package cn.ananyz.cp.service.service.impl;
 
 import cn.ananyz.cp.service.mapper.CpParityAnalysisMapper;
+import cn.ananyz.cp.service.model.CpData;
 import cn.ananyz.cp.service.model.CpParityAnalysis;
 import cn.ananyz.cp.service.model.CpParityAnalysisResult;
 import cn.ananyz.cp.service.service.CpParityAnalysisService;
@@ -13,7 +14,7 @@ import java.util.List;
  * Created by 王晶 on 2018/6/10.
  */
 @Service
-public class CpParityAnalysisServiceImpl implements CpParityAnalysisService {
+public class CpParityAnalysisServiceImpl extends BaseServiceImpl<CpParityAnalysis> implements CpParityAnalysisService {
     @Autowired
     private CpParityAnalysisMapper cpParityAnalysisMapper;
 

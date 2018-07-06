@@ -2,6 +2,7 @@ package cn.ananyz.cp.service.service.impl;
 
 import cn.ananyz.cp.service.mapper.CpDataMapper;
 import cn.ananyz.cp.service.model.CpData;
+import cn.ananyz.cp.service.model.CpDataResultViews;
 import cn.ananyz.cp.service.service.CpDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by 王晶 on 2018/6/10.
  */
 @Service
-public class CpDataServiceImpl implements CpDataService {
+public class CpDataServiceImpl extends BaseServiceImpl<CpData> implements CpDataService {
 
 
     @Autowired

@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
-public class CpDataResultServiceImpl implements CpDataResultService {
+public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> implements CpDataResultService {
     private static Logger logger = Logger.getLogger(CpDataResultServiceImpl.class);
     @Autowired
     private CpDataResultMapper cpDataResultMapper;

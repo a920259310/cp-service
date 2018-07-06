@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 @Service
-public class CpDataResultViewsServiceImpl implements CpDataResultViewsService {
+public class CpDataResultViewsServiceImpl extends BaseServiceImpl<CpDataResultViews> implements CpDataResultViewsService {
     @Autowired
     private CpDataResultViewsMapper cpDataResultViewsMapper;
 

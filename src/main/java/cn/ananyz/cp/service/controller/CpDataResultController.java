@@ -111,7 +111,7 @@ public class CpDataResultController {
         logger.info("分析出的号....:" + cpDataResultViews);
 
         List<CpDataResultView> collect = cpDataResultViews.stream().filter(x -> {
-            return x.getCishu() > 9;
+            return x.getCishu() > 10;
         }).collect(Collectors.toList());
 
         logger.info("邮件预警号....:" + collect);
