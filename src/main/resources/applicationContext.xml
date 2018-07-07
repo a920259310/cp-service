@@ -167,7 +167,7 @@
         <property name="warnCount" value="10"></property>
     </bean>
     <!-- 天津配置 -->
-    <bean id="cpDataResultSscTjConfig" class="cn.ananyz.cp.service.config.CpDataResultSscTjConfig">
+    <!--<bean id="cpDataResultSscTjConfig" class="cn.ananyz.cp.service.config.CpDataResultSscTjConfig">
         <property name="start" value="0"></property>
         <property name="end" value="7"></property>
         <property name="diffNum" value="5"></property>
@@ -182,8 +182,8 @@
         </property>
         <property name="oneDayLastQihao" value="084"></property>
         <property name="warnCount" value="10"></property>
-    </bean>
+    </bean>-->
 
-    <!--<import resource="spring-schedule.xml"></import>-->
+    <import resource="spring-schedule.xml"></import>
 
 </beans>

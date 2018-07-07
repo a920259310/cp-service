@@ -24,7 +24,7 @@ public class CpDataResultSscTjController {
     private CpApi500 cpApi500;
     @Autowired
     private CpDataResultSscTjService cpDataResultSscTjService;
-    @Autowired
+//    @Autowired
     private CpDataResultSscTjConfig cpDataResultSscTjConfig;
 
     @Autowired

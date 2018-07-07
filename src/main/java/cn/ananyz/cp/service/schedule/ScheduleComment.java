@@ -3,6 +3,7 @@ package cn.ananyz.cp.service.schedule;
 import cn.ananyz.cp.service.controller.CpDataResultController;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
+import cn.ananyz.cp.service.data.collection.parse.CpApi163;
 import cn.ananyz.cp.service.model.CpData;
 import cn.ananyz.cp.service.service.AnalysisEngineService;
 import cn.ananyz.cp.service.utils.DateUtil;
@@ -18,14 +19,13 @@ import java.util.UUID;
 @Component
 public class ScheduleComment {
     @Autowired
-    private CpApi cpApi;
+    private CpApi163 cpApi163;
     @Autowired
     private AnalysisEngineService analysisEngineService;
 
 
-
     public void queryCpData() throws Exception {
-        CPDataModel todayLastData = cpApi.getTodayLastData(new Date());
+        CPDataModel todayLastData = cpApi163.getTodayLastData(new Date());
         CpData cpData = convertCPDataModelToCpData(todayLastData);
         analysisEngineService.insert(cpData);
 
