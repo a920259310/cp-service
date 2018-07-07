@@ -58,9 +58,6 @@ public class CpDataResultController {
         }
     }
 
-//    public static void main(String[] args) throws ParseException {
-//        initAllCpData();
-//    }
 
     /**
      * 批量排序插入数据并分析
@@ -68,6 +65,7 @@ public class CpDataResultController {
      * @throws ParseException
      */
     private void insertCpDatas(List<CPDataModel> todayAllData) throws ParseException {
+
         Collections.sort(todayAllData, new Comparator<CPDataModel>() {
             @Override
             public int compare(CPDataModel o1, CPDataModel o2) {
@@ -77,7 +75,7 @@ public class CpDataResultController {
 
         for(CPDataModel cpDataModel : todayAllData){
             convertCpApiToCpDataResult(cpDataModel);
-            List<CpDataResultView> analyzi = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(), cpDataResultConfig.getDiffNum());
+            List<CpDataResultView> analyzi = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(), cpDataResultConfig.getDiffNum(),cpDataResultConfig.getOneDayLastQihao());
             cpDataResultViewsService.insert(analyzi);
         }
     }
@@ -93,25 +91,19 @@ public class CpDataResultController {
         convertCpApiToCpDataResult(todayLastData);
     }
 
-    public static void main(String[] args) throws IOException, ParseException {
-        CpApi cpApi1 = new CpApi163Impl();
-        System.out.println(DateUtil.formatDate(new Date(),DateUtil.PATTERN_DATE));
-        CPDataModel todayLastData = cpApi1.getTodayLastData(new Date());
-        System.out.println(todayLastData);
-    }
     /**
      * 分析结果号码
      * @throws IOException
      * @throws ParseException
      */
     public void analyz() throws IOException, ParseException {
-        List<CpDataResultView> cpDataResultViews = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(),cpDataResultConfig.getDiffNum());
+        List<CpDataResultView> cpDataResultViews = cpDataResultService.analyzi(cpDataResultConfig.getListIndex(), cpDataResultConfig.getStart(), cpDataResultConfig.getEnd(),cpDataResultConfig.getDiffNum(),cpDataResultConfig.getOneDayLastQihao());
         cpDataResultViewsService.insert(cpDataResultViews);
 
         logger.info("分析出的号....:" + cpDataResultViews);
 
         List<CpDataResultView> collect = cpDataResultViews.stream().filter(x -> {
-            return x.getCishu() > 10;
+            return x.getCishu() > cpDataResultConfig.getWarnCount();
         }).collect(Collectors.toList());
 
         logger.info("邮件预警号....:" + collect);

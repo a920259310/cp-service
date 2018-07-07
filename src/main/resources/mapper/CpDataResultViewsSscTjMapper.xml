@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ananyz.cp.service.mapper.CpDataResultViewsSscTjMapper" >
+  <resultMap id="BaseResultMap" type="cn.ananyz.cp.service.model.CpDataResultViewsSscTj" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="cp_index" property="cpIndex" jdbcType="CHAR" />
+    <result column="end_qi_hao" property="endQiHao" jdbcType="VARCHAR" />
+    <result column="start_qi_hao" property="startQiHao" jdbcType="VARCHAR" />
+    <result column="cru_hao_ma" property="cruHaoMa" jdbcType="VARCHAR" />
+    <result column="cishu" property="cishu" jdbcType="INTEGER" />
+    <result column="yichu" property="yichu" jdbcType="VARCHAR" />
+    <result column="weichu" property="weichu" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="start_qi_date" property="startQiDate" jdbcType="DATE" />
+    <result column="end_qi_date" property="endQiDate" jdbcType="DATE" />
+  </resultMap>
+</mapper>

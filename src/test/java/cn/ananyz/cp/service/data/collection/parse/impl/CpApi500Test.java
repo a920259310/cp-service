@@ -2,6 +2,7 @@ package cn.ananyz.cp.service.data.collection.parse.impl;
 
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi500;
+import cn.ananyz.cp.service.utils.DateUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CpApi500Test {
 
     @Test
     public void getTodayAllData() throws IOException, ParseException {
-        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(new Date());
+        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(DateUtil.parseDate("2018-07-06",DateUtil.PATTERN_DATE));
         System.out.println(todayAllData);
     }
 

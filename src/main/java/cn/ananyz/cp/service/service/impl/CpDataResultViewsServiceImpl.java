@@ -69,23 +69,4 @@ public class CpDataResultViewsServiceImpl extends BaseServiceImpl<CpDataResultVi
         return i;
     }
 
-    @Override
-    public int insert(CpDataResultViews cpDataResultViews) {
-        return 0;
-    }
-
-    @Override
-    public CpDataResultViews queryById(Object t) {
-        return null;
-    }
-
-    @Override
-    public List<CpDataResultViews> query(CpDataResultViews cpDataResultViews) {
-        return null;
-    }
-
-    @Override
-    public CpDataResultViews queryByBean(CpDataResultViews cpDataResultViews) throws Exception {
-        return null;
-    }
 }

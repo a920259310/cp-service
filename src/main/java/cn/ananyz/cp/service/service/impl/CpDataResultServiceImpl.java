@@ -19,7 +19,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> implements CpDataResultService {
+
     private static Logger logger = Logger.getLogger(CpDataResultServiceImpl.class);
+
     @Autowired
     private CpDataResultMapper cpDataResultMapper;
 
@@ -46,23 +48,9 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
         return 0;
     }
 
-    @Override
-    public CpDataResult queryById(Object t) {
-        return cpDataResultMapper.selectByPrimaryKey(t);
-    }
 
     @Override
-    public List<CpDataResult> query(CpDataResult cpDataResult) {
-        return cpDataResultMapper.select(cpDataResult);
-    }
-
-    @Override
-    public CpDataResult queryByBean(CpDataResult cpDataResult) throws Exception {
-        return null;
-    }
-
-    @Override
-    public List<CpDataResultView> analyzi(List<String> listIndex,int start,int end,int diffNum) throws ParseException {
+    public List<CpDataResultView> analyzi(List<String> listIndex,int start,int end,int diffNum,String oneDayMaxQihao) throws ParseException {
         List<CpDataResultView> list = new ArrayList<CpDataResultView>();
 
         for(String cpIndex : listIndex){
@@ -77,7 +65,7 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
 
                 if(setNum.size() <= diffNum){  //七期之内 出了小于五种号
 
-                    ivalidataHaoMa(cpDataResults, setNum,diffNum);
+                    ivalidataHaoMa(cpDataResults, setNum,diffNum,oneDayMaxQihao);
 
                     CpDataResult remove = cpDataResults.remove(cpDataResults.size() - 1);
                     CpDataResultView cpDataResultView = new CpDataResultView();
@@ -158,7 +146,7 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
      * @param setNum
      * @throws ParseException
      */
-    private void ivalidataHaoMa(List<CpDataResult> cpDataResults, Set<String> setNum,int diffNum) throws ParseException {
+    private void ivalidataHaoMa(List<CpDataResult> cpDataResults, Set<String> setNum,int diffNum,String oneDayMaxQihao) throws ParseException {
         CpDataResult cpDataResult = cpDataResults.get(cpDataResults.size() - 1);
         int i = Integer.parseInt(cpDataResult.getCpQiHao()) - 1;
         CpDataResult cpDataResultCondition = new CpDataResult();
@@ -168,20 +156,13 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
         cpDataResultCondition.setCpQiHao(NumUtil.converIntToStringNum(i));
 
         if(i < 1){
-            cpDataResultCondition.setCpQiHao("120");
+            cpDataResultCondition.setCpQiHao(oneDayMaxQihao);
             cpDataResultCondition.setCpDate(
                     DateUtil.formatDate(
                             new Date(
                                     DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - (24 * 60 * 60 * 1000)),
                             DateUtil.PATTERN_DATE));
         }
-//        if(i == 119){
-//            cpDataResultCondition.setCpDate(
-//                    DateUtil.formatDate(
-//                            new Date(
-//                                    DateUtil.parseDate(cpDataResult.getCpDate(),DateUtil.PATTERN_DATE).getTime() - (24 * 60 * 60 * 1000)),
-//                            DateUtil.PATTERN_DATE));
-//        }
 
         logger.info("上一期的查询参数.......cpDataResultCondition:" + cpDataResultCondition.toString());
         CpDataResult cpDataResultSelect = cpDataResultMapper.selectOne(cpDataResultCondition);
@@ -191,7 +172,7 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
             setNum.add(cpDataResultSelect.getCpNum());
 
             if(setNum.size() <= diffNum){
-                ivalidataHaoMa(cpDataResults,setNum,diffNum);
+                ivalidataHaoMa(cpDataResults,setNum,diffNum,oneDayMaxQihao);
             }
         }
     }
