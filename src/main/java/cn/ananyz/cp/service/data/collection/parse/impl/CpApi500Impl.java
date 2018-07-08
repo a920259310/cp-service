@@ -29,15 +29,20 @@ public class CpApi500Impl extends BaseCpApiImpl implements CpApi500 {
     }
 
     private Document getTodayDocument(Date date) throws IOException {
-        String format = simpleDateFormat.format(date);
-        Document doc = Jsoup.connect("http://kaijiang.500.com/static/info/kaijiang/xml/tjssc/" + format + ".xml").get();
+        Document doc = Jsoup.connect("https://kaijiang.aicai.com/open/difangIssueDetailByKc.do?gameIndex=325&province=tianjin").get();
         return doc;
     }
     private Elements getTodayElements(Document document){
-        Elements row = document.getElementsByTag("row");
-        return row;
+        Element jq_body_kc_result = document.getElementById("jq_body_kc_result");
+        Elements tr = jq_body_kc_result.getElementsByTag("tr");
+        return tr;
     }
 
+    public static void main(String[] args) throws IOException, ParseException {
+        CpApi500Impl cpApi500 = new CpApi500Impl();
+        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(new Date());
+        System.out.println(todayAllData);
+    }
     @Override
     public List<CPDataModel> getTodayAllData(Date date) throws IOException, ParseException {
         ArrayList<CPDataModel> cpDataModels = new ArrayList<CPDataModel>();
@@ -46,17 +51,19 @@ public class CpApi500Impl extends BaseCpApiImpl implements CpApi500 {
         Iterator<Element> iterator = todayElements.iterator();
         while (iterator.hasNext()){
             Element next = iterator.next();
-            String dataWinNumber = next.attr("opencode");
-            String dataPeriod = next.attr("expect");
-            String opentime = next.attr("opentime");
-            String qiHao = dataPeriod.substring(8,dataPeriod.length());
+            Elements td = next.getElementsByTag("td");
+
+            String dataWinNumber = td.get(2).text();
+            String dataPeriod = td.get(0).text();
+            String opentime = td.get(1).text() + ":00";
+            String qiHao = "0" + dataPeriod.substring(8,dataPeriod.length()-1);
 
             CPDataModel cPDataModel = new CPDataModel();
-            cPDataModel.setLongDateAndQiHao(dataPeriod);
+            cPDataModel.setLongDateAndQiHao(dataPeriod.substring(0,dataPeriod.length()-1));
             cPDataModel.setShortQiHao(qiHao);
             cPDataModel.setOpenTime(DateUtil.parseDate(opentime,DateUtil.PATTERN_DATE_TIME));
 
-            String[] split = dataWinNumber.split(",");
+            String[] split = dataWinNumber.trim().split(",");
             setOpenNum(cPDataModel, split);
             cpDataModels.add(cPDataModel);
         }

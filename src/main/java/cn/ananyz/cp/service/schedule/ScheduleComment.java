@@ -1,5 +1,6 @@
 package cn.ananyz.cp.service.schedule;
 
+import cn.ananyz.cp.service.config.CpDataResultJoConfig;
 import cn.ananyz.cp.service.controller.CpDataResultController;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
@@ -7,6 +8,7 @@ import cn.ananyz.cp.service.data.collection.parse.CpApi163;
 import cn.ananyz.cp.service.model.CpData;
 import cn.ananyz.cp.service.service.AnalysisEngineService;
 import cn.ananyz.cp.service.utils.DateUtil;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,19 +20,25 @@ import java.util.UUID;
  */
 @Component
 public class ScheduleComment {
+    private static Logger logger = Logger.getLogger(ScheduleComment.class);
     @Autowired
     private CpApi163 cpApi163;
     @Autowired
     private AnalysisEngineService analysisEngineService;
-
+    @Autowired
+    private CpDataResultJoConfig cpDataResultJoConfig;
 
     public void queryCpData() throws Exception {
-        CPDataModel todayLastData = cpApi163.getTodayLastData(new Date());
-        CpData cpData = convertCPDataModelToCpData(todayLastData);
-        analysisEngineService.insert(cpData);
+        logger.info("重庆奇偶的配置信息:" + cpDataResultJoConfig);
+        if(cpDataResultJoConfig.getSchedule()){
+            CPDataModel todayLastData = cpApi163.getTodayLastData(new Date());
+            CpData cpData = convertCPDataModelToCpData(todayLastData);
+            analysisEngineService.insert(cpData);
+            String[] strings = {"1", "2","3", "4","5"};
+            send(strings);
+            logger.info("重庆奇偶的调度方法执行了......");
+        }
 
-        String[] strings = {"1", "2","3", "4","5"};
-        send(strings);
     }
 
     private void send(String[] str) throws Exception {

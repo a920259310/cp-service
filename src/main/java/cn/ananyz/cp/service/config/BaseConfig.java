@@ -12,6 +12,24 @@ public class BaseConfig {
     protected String oneDayLastQihao;  //最大期数
     protected int warnCount;    //连续多少次告警
 
+    protected Boolean isInitTodayData;   //是否初始化今日数据
+    protected Boolean isSchedule;   //是否调度
+
+    public Boolean getInitTodayData() {
+        return isInitTodayData;
+    }
+
+    public void setInitTodayData(Boolean initTodayData) {
+        isInitTodayData = initTodayData;
+    }
+
+    public Boolean getSchedule() {
+        return isSchedule;
+    }
+
+    public void setSchedule(Boolean schedule) {
+        isSchedule = schedule;
+    }
 
     public int getDiffNum() {
         return diffNum;
@@ -70,6 +88,8 @@ public class BaseConfig {
                 ", diffNum=" + diffNum +
                 ", oneDayLastQihao='" + oneDayLastQihao + '\'' +
                 ", warnCount=" + warnCount +
+                ", isInitTodayData=" + isInitTodayData +
+                ", isSchedule=" + isSchedule +
                 '}';
     }
 }

@@ -149,4 +149,17 @@ public class CpDataResultSscTj {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+
+    @Override
+    public String toString() {
+        return "CpDataResultSscTj{" +
+                "id=" + id +
+                ", cpDate='" + cpDate + '\'' +
+                ", cpQiHao='" + cpQiHao + '\'' +
+                ", cpIndex='" + cpIndex + '\'' +
+                ", cpNum='" + cpNum + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 }

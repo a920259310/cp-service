@@ -24,11 +24,15 @@ public class CpDataResultSscTjController {
     private CpApi500 cpApi500;
     @Autowired
     private CpDataResultSscTjService cpDataResultSscTjService;
-//    @Autowired
+    @Autowired
     private CpDataResultSscTjConfig cpDataResultSscTjConfig;
 
     @Autowired
     private CpDataResultViewsSscTjService cpDataResultViewsSscTjService;
+
+    public CpDataResultSscTjConfig getCpDataResultSscTjConfig() {
+        return cpDataResultSscTjConfig;
+    }
 
     /**
      * 初始化今天的号码

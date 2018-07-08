@@ -32,6 +32,12 @@ public class CpDataResultController {
     @Autowired
     private CpDataResultViewsService cpDataResultViewsService;
 
+
+    public CpDataResultConfig getCpDataResultConfig() {
+        return cpDataResultConfig;
+    }
+
+
     /**
      * 初始化今天的号码
      * @throws IOException

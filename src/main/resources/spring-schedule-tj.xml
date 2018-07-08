@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                        http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                         http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+   <context:component-scan base-package="cn.ananyz.cp.service.schedule" />
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="30 2,12,22,32,42,52 9-22 * * ?"/>
+    </task:scheduled-tasks>
+
+    <task:scheduled-tasks>
+        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="30 2 23 * * ?"/>
+    </task:scheduled-tasks>
+
+
+</beans>

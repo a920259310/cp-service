@@ -22,7 +22,7 @@ public class CpApi500Test {
 
     @Test
     public void getTodayAllData() throws IOException, ParseException {
-        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(DateUtil.parseDate("2018-07-06",DateUtil.PATTERN_DATE));
+        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(DateUtil.parseDate("2018-07-08",DateUtil.PATTERN_DATE));
         System.out.println(todayAllData);
     }
 
