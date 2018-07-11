@@ -48,6 +48,7 @@ public class CpDataResultSscTjServiceImpl extends BaseServiceImpl<CpDataResultSs
     }
 
 
+
     @Override
     public List<CpDataResultView> analyzi(List<String> listIndex,int start,int end,int diffNum,String oneDayMaxQihao) throws ParseException {
         List<CpDataResultView> list = new ArrayList<CpDataResultView>();
@@ -134,18 +135,6 @@ public class CpDataResultSscTjServiceImpl extends BaseServiceImpl<CpDataResultSs
         }
     }
 
-    @Override
-    public Boolean sendMail(CpDataResultView cpDataResultView) {
-
-        String text = getMailTextByCpDataResultView(cpDataResultView);
-
-        String mailSubjectByCpDataResultView = getMailSubjectByCpDataResultView(cpDataResultView);
-
-        mailService.sendMorePerson(mailConfig.getFrom(),mailConfig.getTo(),mailSubjectByCpDataResultView,text);
-
-        return Boolean.TRUE;
-    }
-
     private String getMailSubjectByCpDataResultView(CpDataResultView cpDataResultView) {
         return "天津" + mailConfig.getSubject() + ",日期:" + DateUtil.formatDate(cpDataResultView.getCreateTime(),DateUtil.PATTERN_DATE) +
                 ",期号:" + cpDataResultView.getEndQihao();
@@ -176,6 +165,57 @@ public class CpDataResultSscTjServiceImpl extends BaseServiceImpl<CpDataResultSs
         return Boolean.TRUE;
     }
 
+    @Override
+    public CpDataResultSscTj selectLastNumByDate(Date date) {
+        CpDataResultSscTj cpDataResultSscTj = new CpDataResultSscTj();
+        cpDataResultSscTj.setCpDate(DateUtil.formatDate(date,DateUtil.PATTERN_DATE));
+
+        List<CpDataResultSscTj> select = mapper.select(cpDataResultSscTj);
+        if(select == null || select.size() == 0){
+            return null;
+        }
+
+        Collections.sort(select, new Comparator<CpDataResultSscTj>() {
+            @Override
+            public int compare(CpDataResultSscTj o1, CpDataResultSscTj o2) {
+                return o1.getCpQiHao().compareTo(o2.getCpQiHao());
+            }
+        });
+
+        return select.get(select.size()-1);
+    }
+
+    @Override
+    public Boolean insertBatch(List<CpDataResultSscTj> cpDataResultSscTj) {
+
+        CpDataResultSscTj cpDataResultSscTjSelect = selectLastNumByDate(new Date());
+
+        Collections.sort(cpDataResultSscTj, new Comparator<CpDataResultSscTj>() {
+            @Override
+            public int compare(CpDataResultSscTj o1, CpDataResultSscTj o2) {
+                return o2.getCpQiHao().compareTo(o1.getCpQiHao());
+            }
+        });
+
+        if(cpDataResultSscTjSelect == null){
+            for(CpDataResultSscTj cpDataResultSscTj2 : cpDataResultSscTj){
+                insert(cpDataResultSscTj2);
+            }
+        }else {
+            List<CpDataResultSscTj> collect = cpDataResultSscTj.stream().filter(s -> {
+                return s.getCpQiHao().compareTo(cpDataResultSscTjSelect.getCpQiHao()) > 0 && s.getCpDate().compareTo(cpDataResultSscTjSelect.getCpDate()) >= 0;
+            }).collect(Collectors.toList());
+
+            if(collect != null){
+                for(CpDataResultSscTj c : collect){
+                    insert(c);
+                }
+            }
+
+        }
+
+        return Boolean.TRUE;
+    }
 
 
 }

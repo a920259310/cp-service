@@ -1,5 +1,6 @@
 package cn.ananyz.cp.service.service;
 
+import cn.ananyz.cp.service.controller.CpDataResultSscTjController;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi500;
 import cn.ananyz.cp.service.model.CpDataResultSscTj;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class) //使用junit4进行测试
 @ContextConfiguration(locations={"classpath:applicationContext.xml"}) //加载配置文件
@@ -20,6 +22,8 @@ public class CpDataResultSscTjServiceTest {
     private CpApi500 cpApi500;
     @Autowired
     private CpDataResultSscTjService cpDataResultSscTjService;
+    @Autowired
+    CpDataResultSscTjController cpDataResultSscTjController;
 
     @Test
     public void insert() throws IOException, ParseException {
@@ -33,4 +37,16 @@ public class CpDataResultSscTjServiceTest {
 
         cpDataResultSscTjService.insert(cpDataResultSscTj);
     }
+    @Test
+    public void selectLastNumByDate() throws IOException, ParseException {
+        CpDataResultSscTj cpDataResultSscTj = cpDataResultSscTjService.selectLastNumByDate(new Date());
+        System.out.println(cpDataResultSscTj);
+    }
+
+    @Test
+    public void insertBatch() throws IOException, ParseException {
+
+        cpDataResultSscTjController.selectCruNum();
+    }
+
 }

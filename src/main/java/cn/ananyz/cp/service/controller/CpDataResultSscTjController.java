@@ -89,8 +89,12 @@ public class CpDataResultSscTjController {
      */
     public void selectCruNum() throws IOException, ParseException {
         Date add = DateUtil.add(new Date(), Calendar.MINUTE, -3);
-        CPDataModel todayLastData = cpApi500.getTodayLastData(add);
-        convertCpApiToCpDataResult(todayLastData);
+        List<CPDataModel> todayAllData = cpApi500.getTodayAllData(add);
+        List<CpDataResultSscTj> cpDataResultSscTjs = convertBatchCpApiToCpDataResult(todayAllData);
+        cpDataResultSscTjService.insertBatch(cpDataResultSscTjs);
+//        CPDataModel todayLastData = cpApi500.getTodayLastData(add);
+//        convertCpApiToCpDataResult(todayLastData);
+//        convertBatchCpApiToCpDataResult
     }
 
     /**
@@ -115,43 +119,68 @@ public class CpDataResultSscTjController {
 
     }
 
+    public List<CpDataResultSscTj> convertBatchCpApiToCpDataResult(List<CPDataModel> cpDataModel) throws ParseException {
+        List<CpDataResultSscTj> cpDataResultSscTjs = new ArrayList<>();
+        for(CPDataModel cpDataModel1 : cpDataModel){
+            List<CpDataResultSscTj> cpDataResultSscTjs1 = convertCpApiToCpDataResult(cpDataModel1);
+            cpDataResultSscTjs.addAll(cpDataResultSscTjs1);
+        }
+
+        return cpDataResultSscTjs;
+    }
 
 
-    private void convertCpApiToCpDataResult(CPDataModel cpDataModel) throws ParseException {
+    public List<CpDataResultSscTj> convertCpApiToCpDataResult(CPDataModel cpDataModel) throws ParseException {
+
+        List<CpDataResultSscTj> cpDataResultSscTjs = new ArrayList<>();
+
+        CpDataResultSscTj cpDataResultSscTjWan = new CpDataResultSscTj();
+
         String shortQiHao = cpDataModel.getShortQiHao();
         String longDateAndQiHao = cpDataModel.getLongDateAndQiHao();
         String qiHao = longDateAndQiHao.substring(0, 8);
 
-        CpDataResultSscTj cpDataResultSscTj = new CpDataResultSscTj();
+        cpDataResultSscTjWan.setCreateTime(new Date());
+        cpDataResultSscTjWan.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
+        cpDataResultSscTjWan.setCpQiHao(shortQiHao);
+        cpDataResultSscTjWan.setCpIndex("1");
+        cpDataResultSscTjWan.setCpNum(cpDataModel.getWan() + "");
 
-        cpDataResultSscTj.setCreateTime(new Date());
-        cpDataResultSscTj.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
-        cpDataResultSscTj.setCpQiHao(shortQiHao);
+        cpDataResultSscTjs.add(cpDataResultSscTjWan);
 
-        cpDataResultSscTj.setId(null);
-        cpDataResultSscTj.setCpIndex("1");
-        cpDataResultSscTj.setCpNum(cpDataModel.getWan() + "");
-        cpDataResultSscTjService.insert(cpDataResultSscTj);
+        CpDataResultSscTj cpDataResultSscTjQian = new CpDataResultSscTj();
+        cpDataResultSscTjQian.setCreateTime(new Date());
+        cpDataResultSscTjQian.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
+        cpDataResultSscTjQian.setCpQiHao(shortQiHao);
+        cpDataResultSscTjQian.setCpIndex("2");
+        cpDataResultSscTjQian.setCpNum(cpDataModel.getQian() + "");
+        cpDataResultSscTjs.add(cpDataResultSscTjQian);
 
-        cpDataResultSscTj.setId(null);
-        cpDataResultSscTj.setCpIndex("2");
-        cpDataResultSscTj.setCpNum(cpDataModel.getQian() + "");
-        cpDataResultSscTjService.insert(cpDataResultSscTj);
+        CpDataResultSscTj cpDataResultSscTjBai = new CpDataResultSscTj();
+        cpDataResultSscTjBai.setCreateTime(new Date());
+        cpDataResultSscTjBai.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
+        cpDataResultSscTjBai.setCpQiHao(shortQiHao);
+        cpDataResultSscTjBai.setCpIndex("3");
+        cpDataResultSscTjBai.setCpNum(cpDataModel.getBai() + "");
+        cpDataResultSscTjs.add(cpDataResultSscTjBai);
 
-        cpDataResultSscTj.setId(null);
-        cpDataResultSscTj.setCpIndex("3");
-        cpDataResultSscTj.setCpNum(cpDataModel.getBai() + "");
-        cpDataResultSscTjService.insert(cpDataResultSscTj);
+        CpDataResultSscTj cpDataResultSscTjShi = new CpDataResultSscTj();
+        cpDataResultSscTjShi.setCreateTime(new Date());
+        cpDataResultSscTjShi.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
+        cpDataResultSscTjShi.setCpQiHao(shortQiHao);
+        cpDataResultSscTjShi.setCpIndex("4");
+        cpDataResultSscTjShi.setCpNum(cpDataModel.getShi() + "");
+        cpDataResultSscTjs.add(cpDataResultSscTjShi);
 
-        cpDataResultSscTj.setId(null);
-        cpDataResultSscTj.setCpIndex("4");
-        cpDataResultSscTj.setCpNum(cpDataModel.getShi() + "");
-        cpDataResultSscTjService.insert(cpDataResultSscTj);
+        CpDataResultSscTj cpDataResultSscTjGe = new CpDataResultSscTj();
+        cpDataResultSscTjGe.setCreateTime(new Date());
+        cpDataResultSscTjGe.setCpDate(DateUtil.formatDate(DateUtil.parseDate(qiHao,DateUtil.PATTERN_DATE_NOT),DateUtil.PATTERN_DATE));
+        cpDataResultSscTjGe.setCpQiHao(shortQiHao);
+        cpDataResultSscTjGe.setCpIndex("5");
+        cpDataResultSscTjGe.setCpNum(cpDataModel.getGe() + "");
+        cpDataResultSscTjs.add(cpDataResultSscTjGe);
 
-        cpDataResultSscTj.setId(null);
-        cpDataResultSscTj.setCpIndex("5");
-        cpDataResultSscTj.setCpNum(cpDataModel.getGe() + "");
-        cpDataResultSscTjService.insert(cpDataResultSscTj);
+        return cpDataResultSscTjs;
     }
 
 
