@@ -54,7 +54,7 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
     }
 
     @Override
-    public void analys(String indexNumP) throws Exception {
+    public void analys(String indexNumP,int warnCount) throws Exception {
 
         CpParityAnalysisResult cpParityAnalysisResult = cpParityAnalysisService.queryCountByIndexNum(indexNumP);
         CpData cpData = cpDataService.queryLastData();
@@ -62,7 +62,7 @@ public class AnalysisEngineServiceImpl implements AnalysisEngineService {
         int ciShu = cpParityAnalysisResult.getCiShu();
         Long batchNum = cpParityAnalysisResult.getBatchNum();
 
-        if(ciShu > 4){
+        if(ciShu > warnCount){
             mailService.sendMorePerson(mailConfig.getFrom(),mailConfig.getTo(),"改版前:" + mailConfig.getSubject() + "," +
                             "日期:"+cpData.getCpDate()+",期号:" + cpData.getCpQiHao(),
                     mailConfig.getText() + "第" + indexNumP+ "位,次数:"+ciShu+",批次号:" + batchNum  + ",时间:" + DateUtil.formatDate(cpData.getCreateTime(),DateUtil.PATTERN_DATE_TIME) + ",号码:"

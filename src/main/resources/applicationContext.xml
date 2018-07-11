@@ -165,7 +165,7 @@
             </list>
         </property>
         <property name="oneDayLastQihao" value="120"></property>
-        <property name="warnCount" value="10"></property>
+        <property name="warnCount" value="7"></property>
         <property name="initTodayData" value="true"></property>
         <property name="schedule" value="true"></property>
     </bean>

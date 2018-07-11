@@ -35,15 +35,15 @@ public class ScheduleComment {
             CpData cpData = convertCPDataModelToCpData(todayLastData);
             analysisEngineService.insert(cpData);
             String[] strings = {"1", "2","3", "4","5"};
-            send(strings);
+            send(strings,cpDataResultJoConfig.getWarnCount());
             logger.info("重庆奇偶的调度方法执行了......");
         }
 
     }
 
-    private void send(String[] str) throws Exception {
+    private void send(String[] str,int warnCount) throws Exception {
         for(String s : str){
-            analysisEngineService.analys(s);
+            analysisEngineService.analys(s,warnCount);
         }
     }
 

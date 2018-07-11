@@ -8,5 +8,5 @@ import cn.ananyz.cp.service.model.CpData;
 public interface AnalysisEngineService {
     public void insert(CpData cpData) throws Exception;
 
-    public void analys(String indexNumP) throws Exception;
+    public void analys(String indexNumP,int warnCount) throws Exception;
 }
