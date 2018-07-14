@@ -20,4 +20,19 @@ public class Constance {
           cpNum.add("0");
           return cpNum;
      }
+
+     public static Set<String> getAllNumBj(){
+          Set<String> cpNum = new HashSet<String>();
+          cpNum.add("01");
+          cpNum.add("02");
+          cpNum.add("03");
+          cpNum.add("04");
+          cpNum.add("05");
+          cpNum.add("06");
+          cpNum.add("07");
+          cpNum.add("08");
+          cpNum.add("09");
+          cpNum.add("10");
+          return cpNum;
+     }
 }

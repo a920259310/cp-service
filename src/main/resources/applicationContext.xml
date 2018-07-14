@@ -152,6 +152,7 @@
 
     <!-- 重奇偶配置 -->
     <bean id="cpDataResultJoConfig" class="cn.ananyz.cp.service.config.CpDataResultJoConfig">
+        <property name="subJect" value="重奇偶"></property>
         <property name="start" value="0"></property>
         <property name="end" value="7"></property>
         <property name="diffNum" value="5"></property>
@@ -172,6 +173,7 @@
 
     <!-- 重庆配置 -->
     <bean id="cpDataResultConfig" class="cn.ananyz.cp.service.config.CpDataResultConfig">
+        <property name="subJect" value="重"></property>
         <property name="start" value="0"></property>
         <property name="end" value="7"></property>
         <property name="diffNum" value="5"></property>
@@ -192,6 +194,7 @@
 
     <!-- 天津配置 -->
     <bean id="cpDataResultSscTjConfig" class="cn.ananyz.cp.service.config.CpDataResultSscTjConfig">
+        <property name="subJect" value="天"></property>
         <property name="start" value="0"></property>
         <property name="end" value="7"></property>
         <property name="diffNum" value="5"></property>
@@ -210,7 +213,34 @@
         <property name="schedule" value="true"></property>
     </bean>
 
+    <!-- 北京配置 -->
+    <bean id="cpDataResultSscBjConfig" class="cn.ananyz.cp.service.config.CpDataResultSscBjConfig">
+        <property name="subJect" value="北"></property>
+        <property name="start" value="0"></property>
+        <property name="end" value="7"></property>
+        <property name="diffNum" value="5"></property>
+        <property name="listIndex">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+                <value>5</value>
+                <value>6</value>
+                <value>7</value>
+                <value>8</value>
+                <value>9</value>
+                <value>10</value>
+            </list>
+        </property>
+        <property name="oneDayLastQihao" value="0"></property>
+        <property name="warnCount" value="10"></property>
+        <property name="initTodayData" value="true"></property>
+        <property name="schedule" value="true"></property>
+        <property name="sleepTime" value="300"></property>
+    </bean>
+
     <import resource="spring-schedule.xml"></import>
     <import resource="spring-schedule-tj.xml"></import>
-
+    <import resource="spring-schedule-bj.xml"></import>
 </beans>

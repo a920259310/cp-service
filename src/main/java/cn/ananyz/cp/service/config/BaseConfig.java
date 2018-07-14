@@ -4,6 +4,8 @@ import java.util.List;
 
 public class BaseConfig {
 
+    protected String subJect; // 类型
+
     protected List<String> listIndex;//索引位置
     protected int start;    //最近起始
     protected int end;     //最近结束
@@ -79,10 +81,19 @@ public class BaseConfig {
         this.warnCount = warnCount;
     }
 
+    public String getSubJect() {
+        return subJect;
+    }
+
+    public void setSubJect(String subJect) {
+        this.subJect = subJect;
+    }
+
     @Override
     public String toString() {
         return "BaseConfig{" +
-                "listIndex=" + listIndex +
+                "subJect='" + subJect + '\'' +
+                ", listIndex=" + listIndex +
                 ", start=" + start +
                 ", end=" + end +
                 ", diffNum=" + diffNum +

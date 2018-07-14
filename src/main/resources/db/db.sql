@@ -119,17 +119,29 @@ CREATE TABLE `cp_data_result_views_ssc_tj` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7209 DEFAULT CHARSET=utf8;
 
+
+
+
+
+
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`cp` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `cp`;
+
+/*Table structure for table `cp_data_result_ssc_bj` */
+
 DROP TABLE IF EXISTS `cp_data_result_ssc_bj`;
 
 CREATE TABLE `cp_data_result_ssc_bj` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `cp_date` varchar(10) DEFAULT NULL COMMENT '日期',
-  `cp_qi_hao` varchar(3) DEFAULT NULL COMMENT '期号',
+  `cp_date` varchar(19) DEFAULT NULL COMMENT '日期',
+  `cp_qi_hao` int(11) DEFAULT NULL COMMENT '期号',
   `cp_index` enum('1','2','3','4','5','6','7','8','9','10') DEFAULT NULL COMMENT '位置',
   `cp_num` enum('01','02','03','04','05','06','07','08','09','10') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1723 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_views_ssc_bj` */
 
@@ -137,10 +149,10 @@ DROP TABLE IF EXISTS `cp_data_result_views_ssc_bj`;
 
 CREATE TABLE `cp_data_result_views_ssc_bj` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `cp_index` enum('1','2','3','4','5') DEFAULT NULL COMMENT '角标',
-  `end_qi_hao` varchar(3) DEFAULT NULL COMMENT '结束期号',
-  `start_qi_hao` varchar(3) DEFAULT NULL COMMENT '开始期号',
-  `cru_hao_ma` varchar(1) DEFAULT NULL COMMENT '当前号码',
+  `cp_index` enum('1','2','3','4','5','6','7','8','9','10') DEFAULT NULL COMMENT '角标',
+  `start_qi_hao` int(11) DEFAULT NULL COMMENT '开始期号',
+  `end_qi_hao` int(11) DEFAULT NULL COMMENT '结束期号',
+  `cru_hao_ma` varchar(2) DEFAULT NULL COMMENT '当前号码',
   `cishu` int(3) DEFAULT NULL COMMENT '次数',
   `yichu` varchar(32) DEFAULT NULL COMMENT '已出号码',
   `weichu` varchar(32) DEFAULT NULL COMMENT '未出号码',
@@ -149,4 +161,4 @@ CREATE TABLE `cp_data_result_views_ssc_bj` (
   `start_qi_date` date DEFAULT NULL COMMENT '开始期号开奖日期',
   `end_qi_date` date DEFAULT NULL COMMENT '结束期号开奖日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;

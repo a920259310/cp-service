@@ -65,10 +65,20 @@
         <!--<table tableName="cp_data_result_views">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>-->
+
+        <!--
         <table tableName="cp_data_result_ssc_tj">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="cp_data_result_views_ssc_tj">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        -->
+
+        <table tableName="cp_data_result_ssc_bj">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="cp_data_result_views_ssc_bj">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

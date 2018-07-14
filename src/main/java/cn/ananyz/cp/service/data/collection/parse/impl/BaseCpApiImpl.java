@@ -1,6 +1,7 @@
 package cn.ananyz.cp.service.data.collection.parse.impl;
 
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
+import cn.ananyz.cp.service.data.collection.model.CPDataModel2;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-public abstract class BaseCpApiImpl implements CpApi {
+public class BaseCpApiImpl implements CpApi {
 
     protected String parseDateFormat = "yyyyMMdd";
     protected SimpleDateFormat simpleDateFormat = new SimpleDateFormat(parseDateFormat);
@@ -44,6 +45,16 @@ public abstract class BaseCpApiImpl implements CpApi {
             }
         }
 
+        return null;
+    }
+
+    @Override
+    public List<CPDataModel2> getTodayAllDatas(Date date) throws IOException, ParseException {
+        return null;
+    }
+
+    @Override
+    public List<CPDataModel2> getDataByQiHao(int qiHao) throws IOException, ParseException {
         return null;
     }
 
