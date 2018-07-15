@@ -223,9 +223,9 @@ public class CpDataResultSscBjServiceImpl extends BaseServiceImpl<CpDataResultSs
         if(cpDataResultSscBj == null){
             return null;
         }
-
+        logger.info("隐藏期号: " + (cpDataResultSscBj.getCpQiHao() + 1));
         List<CPDataModel2> dataByQiHao = cpApiBj.getDataByQiHao(cpDataResultSscBj.getCpQiHao() + 1);
-
+        logger.info("隐藏查询结果: dataByQiHao:" + dataByQiHao);
         return convertCPDataModel2ToCpDataResultSscBjs(dataByQiHao);
     }
 

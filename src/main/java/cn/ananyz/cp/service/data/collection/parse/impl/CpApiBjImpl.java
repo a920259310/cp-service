@@ -28,7 +28,8 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
     }
 
     private Document getTodayDocument(Date date) throws IOException {
-        Document doc = Jsoup.connect("http://www.bwlc.net/bulletin/prevtrax.html").get();
+//        Document doc = Jsoup.connect("http://www.bwlc.net/bulletin/prevtrax.html").get();
+        Document doc = Jsoup.connect("https://www.78977a.com/draw-pk10-today.html").get();
         return doc;
     }
 
@@ -41,10 +42,10 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
 
     public static void main(String[] args) throws IOException, ParseException {
         CpApiBjImpl cpApibj = new CpApiBjImpl();
-//        List<CPDataModel2> todayAllDatas = cpApibj.getTodayAllDatas(new Date());
-//        System.out.println(todayAllDatas);
-        List<CPDataModel2> dataByQiHao = cpApibj.getDataByQiHao(692781);
-        System.out.println(dataByQiHao);
+        List<CPDataModel2> todayAllDatas = cpApibj.getTodayAllDatas(new Date());
+        System.out.println(todayAllDatas);
+//        List<CPDataModel2> dataByQiHao = cpApibj.getDataByQiHao(692845);
+//        System.out.println(dataByQiHao);
     }
 
 
@@ -57,9 +58,6 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
 
         getCpDataModel2ByElements(cpDataModels, todayElements);
 
-        if(cpDataModels.size() == 0){
-            return null;
-        }
         return cpDataModels;
     }
 
@@ -84,18 +82,26 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
         Iterator<Element> iterator = todayElements.iterator();
         while (iterator.hasNext()){
             Element next = iterator.next();
-            Elements td = next.getElementsByTag("td");
 
-            String dataPeriod = td.get(0).text();
-            String dataWinNumber = td.get(1).text();
-            String opentime = td.get(2).text() + ":00";
+            Elements tds = next.getElementsByTag("td");
+            String[] split1 = tds.first().text().split(" ");
+
+            String dataPeriod = split1[0];   //期号
+            String opentime = split1[1]; //开奖时间
+
+            Element element = tds.get(1);
+            String span = element.getElementsByTag("div").first().tagName("span").text();
+
+            String dataWinNumber = span; //号码
 
             CPDataModel2 cPDataModel2 = new CPDataModel2();
             cPDataModel2.setLongDateAndQiHao(dataPeriod);
             cPDataModel2.setShortQiHao(dataPeriod);
-            cPDataModel2.setOpenTime(DateUtil.parseDate(opentime,DateUtil.PATTERN_DATE_TIME));
 
-            String[] split = dataWinNumber.trim().split(",");
+            String dateTime = DateUtil.formatDate(new Date(), DateUtil.PATTERN_DATE) + " " + opentime;
+            cPDataModel2.setOpenTime(DateUtil.parseDate(dateTime,DateUtil.PATTERN_DATE_TIME));
+
+            String[] split = dataWinNumber.trim().split(" ");
 
             List<CPDataModel2> cpDataModel2s = setOpenNum(cPDataModel2, split);
             cpDataModels.addAll(cpDataModel2s);

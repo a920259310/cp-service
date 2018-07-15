@@ -12,15 +12,15 @@
    <context:component-scan base-package="cn.ananyz.cp.service.schedule" />
 
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="30 12,22,32,42,52 9 * * ?"/>
+        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="55 12,22,32,42,52 9 * * ?"/>
     </task:scheduled-tasks>
 
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="30 2,12,22,32,42,52 10-22 * * ?"/>
+        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="55 2,12,22,32,42,52 10-22 * * ?"/>
     </task:scheduled-tasks>
 
     <task:scheduled-tasks>
-        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="30 2 23 * * ?"/>
+        <task:scheduled ref="scheduleCpDataResultSscTj" method="analyz" cron="55 2 23 * * ?"/>
     </task:scheduled-tasks>
 
 

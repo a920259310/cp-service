@@ -59,7 +59,7 @@ public class CpDataResultSscBjController {
         /**
          * 搜索隐藏数据插入
          */
-        Boolean aBoolean1 = cpDataResultSscBjService.insertByQihaoInsertMysql(cpDataResultSscBjConfig.getSleepTime());
+//        Boolean aBoolean1 = cpDataResultSscBjService.insertByQihaoInsertMysql(cpDataResultSscBjConfig.getSleepTime());
         /**
          * 分析
          */
