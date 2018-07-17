@@ -1,12 +1,12 @@
 package cn.ananyz.cp.service.service.impl;
 
 import cn.ananyz.cp.service.model.CpDataResultViewsSscBj;
+import cn.ananyz.cp.service.model.anlyz.MaxCountView;
 import cn.ananyz.cp.service.service.CpDataResultViewsSscBjService;
 import cn.ananyz.cp.service.view.CpDataResultView;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -64,5 +64,10 @@ public class CpDataResultViewsSscBjServiceImpl extends BaseServiceImpl<CpDataRes
             i = i + insert;
         }
         return i;
+    }
+
+    @Override
+    public MaxCountView selectMaxCountViewByStartAndEndTime(Date startTime, Date endTime) {
+        return cpDataResultViewsSscBjMapper.selectMaxCishuViewByStartAndEndTime(startTime,endTime);
     }
 }

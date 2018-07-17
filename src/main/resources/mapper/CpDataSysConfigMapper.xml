@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ananyz.cp.service.mapper.CpDataSysConfigMapper">
+  <resultMap id="BaseResultMap" type="cn.ananyz.cp.service.model.CpDataSysConfig">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="game_type" jdbcType="CHAR" property="gameType" />
+    <result column="plan_count" jdbcType="INTEGER" property="planCount" />
+    <result column="recent_day" jdbcType="INTEGER" property="recentDay" />
+    <result column="lg_max_count" jdbcType="INTEGER" property="lgMaxCount" />
+    <result column="max_count" jdbcType="INTEGER" property="maxCount" />
+    <result column="max_count_count" jdbcType="INTEGER" property="maxCountCount" />
+    <result column="max_count_date_time_max" jdbcType="TIMESTAMP" property="maxCountDateTimeMax" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+</mapper>

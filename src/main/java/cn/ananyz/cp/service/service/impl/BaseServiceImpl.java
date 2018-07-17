@@ -1,5 +1,6 @@
 package cn.ananyz.cp.service.service.impl;
 
+import cn.ananyz.cp.service.mapper.CpDataResultViewsSscBjMapper;
 import cn.ananyz.cp.service.service.BaseService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,13 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Autowired
     protected Mapper<T> mapper;
+    @Autowired
+    protected CpDataResultViewsSscBjMapper cpDataResultViewsSscBjMapper;
+//    @Autowired
+//    protected CpDataResultViewsSscBjMapper cpDataResultViewsSscBjMapper;
+//    @Autowired
+//    protected CpDataResultViewsSscBjMapper cpDataResultViewsSscBjMapper;
+
 
     public Mapper<T> getMapper() {
         return mapper;

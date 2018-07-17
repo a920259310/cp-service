@@ -1,7 +1,6 @@
 package cn.ananyz.cp.service.mapper;
 
 import cn.ananyz.cp.service.model.CpDataResultSscBj;
-import cn.ananyz.cp.service.model.CpDataResultSscTj;
 import org.apache.ibatis.annotations.Param;
 import tk.mybatis.mapper.common.Mapper;
 

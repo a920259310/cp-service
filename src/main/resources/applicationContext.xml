@@ -215,7 +215,7 @@
 
     <!-- 北京配置 -->
     <bean id="cpDataResultSscBjConfig" class="cn.ananyz.cp.service.config.CpDataResultSscBjConfig">
-        <property name="subJect" value="北"></property>
+        <property name="subJect" value="北测试程序"></property>
         <property name="start" value="0"></property>
         <property name="end" value="7"></property>
         <property name="diffNum" value="5"></property>
@@ -240,7 +240,7 @@
         <property name="sleepTime" value="300"></property>
     </bean>
 
-    <import resource="spring-schedule.xml"></import>
-    <import resource="spring-schedule-tj.xml"></import>
-    <import resource="spring-schedule-bj.xml"></import>
+    <!--<import resource="spring-schedule.xml"></import>-->
+    <!--<import resource="spring-schedule-tj.xml"></import>-->
+    <!--<import resource="spring-schedule-bj.xml"></import>-->
 </beans>

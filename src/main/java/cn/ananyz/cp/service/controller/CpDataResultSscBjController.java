@@ -3,9 +3,12 @@ package cn.ananyz.cp.service.controller;
 import cn.ananyz.cp.service.config.CpDataResultSscBjConfig;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel2;
 import cn.ananyz.cp.service.data.collection.parse.CpApiBj;
+import cn.ananyz.cp.service.enums.GameTypeEnum;
 import cn.ananyz.cp.service.model.CpDataResultSscBj;
+import cn.ananyz.cp.service.model.CpDataSysConfig;
 import cn.ananyz.cp.service.service.CpDataResultSscBjService;
 import cn.ananyz.cp.service.service.CpDataResultViewsSscBjService;
+import cn.ananyz.cp.service.service.CpDataSysConfigService;
 import cn.ananyz.cp.service.service.MailSendService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
@@ -34,6 +37,9 @@ public class CpDataResultSscBjController {
 
     @Autowired
     private CpDataResultViewsSscBjService cpDataResultViewsSscBjService;
+
+    @Autowired
+    private CpDataSysConfigService cpDataSysConfigService;
 
     @Autowired
     private MailSendService mailSendService;
@@ -77,10 +83,18 @@ public class CpDataResultSscBjController {
         cpDataResultViewsSscBjService.insert(analyzi);
 
         /**
+         * 更新预警配置
+         */
+        cpDataSysConfigService.updateMaxCount(GameTypeEnum.GAME_TYPE_ENUM_BJ.getGameType());
+        /**
+         * 查询预警配置
+         */
+        CpDataSysConfig cpDataSysConfig = cpDataSysConfigService.selectCpDataSysConfigByGameTypeOne(GameTypeEnum.GAME_TYPE_ENUM_BJ.getGameType());
+        /**
          * 邮件发送分析结果
          */
         List<CpDataResultView> collect = analyzi.stream().filter(x -> {
-            return x.getCishu() > cpDataResultSscBjConfig.getWarnCount();
+            return x.getCishu() >= (cpDataSysConfig.getMaxCount() + cpDataSysConfig.getLgMaxCount() - cpDataSysConfig.getPlanCount());
         }).collect(Collectors.toList());
 
         logger.info("北京邮件预警号....:" + collect);

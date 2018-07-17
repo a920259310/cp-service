@@ -75,10 +75,14 @@
         </table>
         -->
 
-        <table tableName="cp_data_result_ssc_bj">
+        <!--<table tableName="cp_data_result_ssc_bj">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
         <table tableName="cp_data_result_views_ssc_bj">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>-->
+
+        <table tableName="cp_data_sys_config">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
     </context>

@@ -25,26 +25,26 @@ public class InstantiationTracingBeanPostProcessor implements ApplicationListene
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        try {
-
-            if(cpDataResultController.getCpDataResultConfig().getInitTodayData()){
-                cpDataResultController.initToday();
-                logger.info("重庆今日数据初始化方法运行了.............");
-            }
-            if(cpDataResultSscTjController.getCpDataResultSscTjConfig().getInitTodayData()){
-                cpDataResultSscTjController.initToday();
-                logger.info("天津今日数据初始化方法运行了.............");
-            }
-
-            if(cpDataResultSscBjController.getCpDataResultSscBjConfig().getInitTodayData()){
-                cpDataResultSscBjController.getLastNumInsertMysql();
-                logger.info("北京今日数据初始化方法运行了.............");
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        try {
+//
+////            if(cpDataResultController.getCpDataResultConfig().getInitTodayData()){
+////                cpDataResultController.initToday();
+////                logger.info("重庆今日数据初始化方法运行了.............");
+////            }
+////            if(cpDataResultSscTjController.getCpDataResultSscTjConfig().getInitTodayData()){
+////                cpDataResultSscTjController.initToday();
+////                logger.info("天津今日数据初始化方法运行了.............");
+////            }
+//
+//            if(cpDataResultSscBjController.getCpDataResultSscBjConfig().getInitTodayData()){
+//                cpDataResultSscBjController.getLastNumInsertMysql();
+//                logger.info("北京今日数据初始化方法运行了.............");
+//            }
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 }
