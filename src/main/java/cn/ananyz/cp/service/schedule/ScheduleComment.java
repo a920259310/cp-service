@@ -6,6 +6,7 @@ import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
 import cn.ananyz.cp.service.data.collection.parse.CpApi163;
 import cn.ananyz.cp.service.model.CpData;
+import cn.ananyz.cp.service.schedule.config.ScheduleConfig;
 import cn.ananyz.cp.service.service.AnalysisEngineService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import org.apache.log4j.Logger;
@@ -29,16 +30,17 @@ public class ScheduleComment {
     private CpDataResultJoConfig cpDataResultJoConfig;
 
     public void queryCpData() throws Exception {
-        logger.info("重庆奇偶的配置信息:" + cpDataResultJoConfig);
-        if(cpDataResultJoConfig.getSchedule()){
-            CPDataModel todayLastData = cpApi163.getTodayLastData(new Date());
-            CpData cpData = convertCPDataModelToCpData(todayLastData);
-            analysisEngineService.insert(cpData);
-            String[] strings = {"1", "2","3", "4","5"};
-            send(strings,cpDataResultJoConfig.getWarnCount());
-            logger.info("重庆奇偶的调度方法执行了......");
+        if(!ScheduleConfig.IS_COMPLATE_START_BOOT_SCHEDULE){
+            logger.info("重庆奇偶的配置信息:" + cpDataResultJoConfig);
+            if(cpDataResultJoConfig.getSchedule()){
+                CPDataModel todayLastData = cpApi163.getTodayLastData(new Date());
+                CpData cpData = convertCPDataModelToCpData(todayLastData);
+                analysisEngineService.insert(cpData);
+                String[] strings = {"1", "2","3", "4","5"};
+                send(strings,cpDataResultJoConfig.getWarnCount());
+                logger.info("重庆奇偶的调度方法执行了......");
+            }
         }
-
     }
 
     private void send(String[] str,int warnCount) throws Exception {

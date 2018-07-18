@@ -3,9 +3,12 @@ package cn.ananyz.cp.service.controller;
 import cn.ananyz.cp.service.config.CpDataResultSscTjConfig;
 import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi500;
+import cn.ananyz.cp.service.enums.GameTypeEnum;
 import cn.ananyz.cp.service.model.CpDataResultSscTj;
+import cn.ananyz.cp.service.model.CpDataSysConfig;
 import cn.ananyz.cp.service.service.CpDataResultSscTjService;
 import cn.ananyz.cp.service.service.CpDataResultViewsSscTjService;
+import cn.ananyz.cp.service.service.CpDataSysConfigService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
 import org.apache.log4j.Logger;
@@ -29,6 +32,9 @@ public class CpDataResultSscTjController {
 
     @Autowired
     private CpDataResultViewsSscTjService cpDataResultViewsSscTjService;
+
+    @Autowired
+    private CpDataSysConfigService cpDataSysConfigService;
 
     public CpDataResultSscTjConfig getCpDataResultSscTjConfig() {
         return cpDataResultSscTjConfig;
@@ -109,8 +115,20 @@ public class CpDataResultSscTjController {
 
         logger.info("天津分析出的号....:" + cpDataResultViews);
 
+
+        /**
+         * 更新预警配置
+         */
+        cpDataSysConfigService.updateMaxCount(GameTypeEnum.GAME_TYPE_ENUM_TJ.getGameType());
+
+        /**
+         * 查询预警配置
+         */
+        CpDataSysConfig cpDataSysConfig = cpDataSysConfigService.selectCpDataSysConfigByGameTypeOne(GameTypeEnum.GAME_TYPE_ENUM_TJ.getGameType());
+
+
         List<CpDataResultView> collect = cpDataResultViews.stream().filter(x -> {
-            return x.getCishu() > cpDataResultSscTjConfig.getWarnCount();
+            return x.getCishu() >= (cpDataSysConfig.getMaxCount() + cpDataSysConfig.getLgMaxCount() - cpDataSysConfig.getPlanCount());
         }).collect(Collectors.toList());
 
         logger.info("天津邮件预警号....:" + collect);

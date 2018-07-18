@@ -90,6 +90,7 @@ public class CpDataResultSscBjController {
          * 查询预警配置
          */
         CpDataSysConfig cpDataSysConfig = cpDataSysConfigService.selectCpDataSysConfigByGameTypeOne(GameTypeEnum.GAME_TYPE_ENUM_BJ.getGameType());
+
         /**
          * 邮件发送分析结果
          */

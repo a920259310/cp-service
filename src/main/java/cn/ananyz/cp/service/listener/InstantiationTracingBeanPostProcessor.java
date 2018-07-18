@@ -3,7 +3,7 @@ package cn.ananyz.cp.service.listener;
 import cn.ananyz.cp.service.controller.CpDataResultController;
 import cn.ananyz.cp.service.controller.CpDataResultSscBjController;
 import cn.ananyz.cp.service.controller.CpDataResultSscTjController;
-import cn.ananyz.cp.service.service.impl.CpDataResultServiceImpl;
+import cn.ananyz.cp.service.schedule.config.ScheduleConfig;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -46,5 +46,7 @@ public class InstantiationTracingBeanPostProcessor implements ApplicationListene
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        ScheduleConfig.IS_COMPLATE_START_BOOT_SCHEDULE = Boolean.FALSE;
     }
 }

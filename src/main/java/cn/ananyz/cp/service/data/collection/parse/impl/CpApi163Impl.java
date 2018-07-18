@@ -56,36 +56,12 @@ public class CpApi163Impl extends BaseCpApiImpl implements CpApi163 {
 
     @Override
     public CPDataModel getTodayLastData(Date date) throws IOException, ParseException {
-
-//        List<CPDataModel> todayAllDatas = getTodayAllData(date);
-//        if(todayAllDatas == null || todayAllDatas.size() == 0){
-//            return null;
-//        }
-//        Collections.sort(todayAllDatas, new Comparator<CPDataModel>() {
-//            @Override
-//            public int compare(CPDataModel o1, CPDataModel o2) {
-//                return o1.getLongDateAndQiHao().compareTo(o2.getLongDateAndQiHao());
-//            }
-//        });
-//
-//        return todayAllDatas.get(todayAllDatas.size()-1);
-
         return super.getTodayLastData(date);
     }
 
 
     @Override
     public CPDataModel getDataByDateAndQiHao(Date date, Integer qiHao) throws IOException, ParseException {
-//        List<CPDataModel> todayAllDatas = getTodayAllData(date);
-//
-//        for(CPDataModel todayAllData : todayAllDatas ){
-//            if(qiHao == Integer.parseInt(todayAllData.getShortQiHao())){
-//                return todayAllData;
-//            }
-//        }
-//
-//        return null;
-
         return super.getDataByDateAndQiHao(date,qiHao);
     }
 }

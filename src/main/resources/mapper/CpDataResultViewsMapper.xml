@@ -18,4 +18,24 @@
     <result column="start_qi_date" jdbcType="DATE" property="startQiDate" />
     <result column="end_qi_date" jdbcType="DATE" property="endQiDate" />
   </resultMap>
+
+  <resultMap id="anylysResultMap" type="cn.ananyz.cp.service.model.anlyz.MaxCountView" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <result column="maxCount" property="maxCount" jdbcType="INTEGER" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+  </resultMap>
+
+  <select id="selectMaxCishuViewByStartAndEndTime" resultMap="anylysResultMap">
+    SELECT
+    cishu AS maxCount,
+    COUNT(*) AS COUNT,
+    MAX(create_time) AS createTime
+    FROM cp_data_result_views
+    WHERE create_time > #{startTime} AND create_time &lt;= #{endTime}
+    GROUP BY cishu
+    ORDER BY cishu DESC,create_time ASC
+    LIMIT 0,1;
+  </select>
 </mapper>

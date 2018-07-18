@@ -5,9 +5,12 @@ import cn.ananyz.cp.service.data.collection.model.CPDataModel;
 import cn.ananyz.cp.service.data.collection.parse.CpApi;
 import cn.ananyz.cp.service.data.collection.parse.CpApi163;
 import cn.ananyz.cp.service.data.collection.parse.impl.CpApi163Impl;
+import cn.ananyz.cp.service.enums.GameTypeEnum;
 import cn.ananyz.cp.service.model.CpDataResult;
+import cn.ananyz.cp.service.model.CpDataSysConfig;
 import cn.ananyz.cp.service.service.CpDataResultService;
 import cn.ananyz.cp.service.service.CpDataResultViewsService;
+import cn.ananyz.cp.service.service.CpDataSysConfigService;
 import cn.ananyz.cp.service.utils.DateUtil;
 import cn.ananyz.cp.service.view.CpDataResultView;
 import org.apache.log4j.Logger;
@@ -31,6 +34,8 @@ public class CpDataResultController {
 
     @Autowired
     private CpDataResultViewsService cpDataResultViewsService;
+    @Autowired
+    private CpDataSysConfigService cpDataSysConfigService;
 
 
     public CpDataResultConfig getCpDataResultConfig() {
@@ -93,8 +98,23 @@ public class CpDataResultController {
      */
     public void selectCruNum() throws IOException, ParseException {
         Date add = DateUtil.add(new Date(), Calendar.MINUTE, -3);
-        CPDataModel todayLastData = cpApi163.getTodayLastData(add);
-        convertCpApiToCpDataResult(todayLastData);
+
+        //获取该日期下的最大数据
+        CpDataResult cpDataResult = cpDataResultService.selectByDateLastData(add);
+
+        String cpQihao = null;
+
+        if(cpDataResult != null){
+            cpQihao = cpDataResult.getCpQiHao();
+        }
+
+        List<CPDataModel> todayLastDatasByQihao = cpApi163.getTodayLastDatasByQihao(add, cpQihao);
+
+        if(todayLastDatasByQihao !=null){
+            for (CPDataModel todayLastData : todayLastDatasByQihao) {
+                convertCpApiToCpDataResult(todayLastData);
+            }
+        }
     }
 
     /**
@@ -108,8 +128,18 @@ public class CpDataResultController {
 
         logger.info("分析出的号....:" + cpDataResultViews);
 
+        /**
+         * 更新预警配置
+         */
+        cpDataSysConfigService.updateMaxCount(GameTypeEnum.GAME_TYPE_ENUM_CQ.getGameType());
+
+        /**
+         * 查询预警配置
+         */
+        CpDataSysConfig cpDataSysConfig = cpDataSysConfigService.selectCpDataSysConfigByGameTypeOne(GameTypeEnum.GAME_TYPE_ENUM_CQ.getGameType());
+
         List<CpDataResultView> collect = cpDataResultViews.stream().filter(x -> {
-            return x.getCishu() > cpDataResultConfig.getWarnCount();
+            return x.getCishu() >= (cpDataSysConfig.getMaxCount() + cpDataSysConfig.getLgMaxCount() - cpDataSysConfig.getPlanCount());
         }).collect(Collectors.toList());
 
         logger.info("邮件预警号....:" + collect);

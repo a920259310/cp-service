@@ -139,6 +139,33 @@ public class CpDataResultServiceImpl extends BaseServiceImpl<CpDataResult> imple
         return Boolean.TRUE;
     }
 
+    @Override
+    public List<CpDataResult> selectByDate(Date date) {
+        CpDataResult cpDataResult = new CpDataResult();
+        cpDataResult.setCpDate(DateUtil.formatDate(date,DateUtil.PATTERN_DATE));
+        List<CpDataResult> select = mapper.select(cpDataResult);
+        return select;
+    }
+
+    @Override
+    public CpDataResult selectByDateLastData(Date date) {
+
+        List<CpDataResult> cpDataResults = selectByDate(date);
+
+        if(cpDataResults == null || cpDataResults.size()==0){
+            return null;
+        }
+
+        Collections.sort(cpDataResults, new Comparator<CpDataResult>() {
+            @Override
+            public int compare(CpDataResult o1, CpDataResult o2) {
+                return o1.getCpQiHao().compareTo(o2.getCpQiHao());
+            }
+        });
+
+        return cpDataResults.get(cpDataResults.size()-1);
+    }
+
 
     /**
      * 递归按条件查询

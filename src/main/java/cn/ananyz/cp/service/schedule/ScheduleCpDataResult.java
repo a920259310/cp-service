@@ -1,6 +1,7 @@
 package cn.ananyz.cp.service.schedule;
 
 import cn.ananyz.cp.service.controller.CpDataResultController;
+import cn.ananyz.cp.service.schedule.config.ScheduleConfig;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,12 +16,13 @@ public class ScheduleCpDataResult {
     private CpDataResultController cpDataResultController;
 
     public void analyz() throws IOException, ParseException {
-        logger.info("重庆的配置信息:" + cpDataResultController.getCpDataResultConfig());
-        if(cpDataResultController.getCpDataResultConfig().getSchedule()){
-            cpDataResultController.selectCruNum();
-            cpDataResultController.analyz();
-            logger.info("重庆的调度方法执行了......");
+        if(!ScheduleConfig.IS_COMPLATE_START_BOOT_SCHEDULE){
+            logger.info("重庆的配置信息:" + cpDataResultController.getCpDataResultConfig());
+            if(cpDataResultController.getCpDataResultConfig().getSchedule()){
+                cpDataResultController.selectCruNum();
+                cpDataResultController.analyz();
+                logger.info("重庆的调度方法执行了......");
+            }
         }
-
     }
 }

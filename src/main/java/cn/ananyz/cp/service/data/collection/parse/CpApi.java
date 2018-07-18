@@ -16,6 +16,8 @@ public interface CpApi {
 
     public CPDataModel getTodayLastData(Date date) throws IOException, ParseException;
 
+    public List<CPDataModel> getTodayLastDatasByQihao(Date date,String cpQihao) throws IOException, ParseException;
+
     public CPDataModel getDataByDateAndQiHao(Date date, Integer qiHao) throws IOException, ParseException;
 
 
