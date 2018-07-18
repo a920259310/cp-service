@@ -240,7 +240,7 @@
         <property name="sleepTime" value="300"></property>
     </bean>
 
-    <!--<import resource="spring-schedule.xml"></import>-->
-    <!--<import resource="spring-schedule-tj.xml"></import>-->
-    <!--<import resource="spring-schedule-bj.xml"></import>-->
+    <import resource="spring-schedule.xml"></import>
+    <import resource="spring-schedule-tj.xml"></import>
+    <import resource="spring-schedule-bj.xml"></import>
 </beans>
