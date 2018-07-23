@@ -42,7 +42,7 @@ public class CpDataSysConfigServiceImpl extends BaseServiceImpl<CpDataSysConfig>
 
         //配置的最大连续次数或者配置的更新时间小于
         if(selectCpDataSysConfigByGameTypeOne.getMaxCount() < maxCountView.getMaxCount()
-                || selectCpDataSysConfigByGameTypeOne.getUpdateTime().getTime() < startDate.getTime()
+                || selectCpDataSysConfigByGameTypeOne.getMaxCountDateTimeMax().getTime() < startDate.getTime()
                 || (selectCpDataSysConfigByGameTypeOne.getMaxCount() == maxCountView.getMaxCount()
                     && selectCpDataSysConfigByGameTypeOne.getMaxCountCount() < maxCountView.getCount())
                 ){
