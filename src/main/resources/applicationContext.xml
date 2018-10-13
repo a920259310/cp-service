@@ -136,7 +136,7 @@
         <property name="host" value="smtp.163.com"></property>
         <property name="port" value="25"></property>
         <property name="username" value="lian920259310@163.com"></property>
-        <property name="password" value="f19931006"></property>
+        <property name="password" value="a19931006"></property>
     </bean>
 
     <bean id="mailConfig" class="cn.ananyz.cp.service.mail.MailConfig" >
