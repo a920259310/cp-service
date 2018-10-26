@@ -45,7 +45,7 @@ CREATE TABLE `cp_data_result` (
   `cp_num` enum('0','1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11346 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=341 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_ssc_bj` */
 
@@ -59,7 +59,7 @@ CREATE TABLE `cp_data_result_ssc_bj` (
   `cp_num` enum('01','02','03','04','05','06','07','08','09','10') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1723 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1011 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_ssc_tj` */
 
@@ -73,7 +73,7 @@ CREATE TABLE `cp_data_result_ssc_tj` (
   `cp_num` enum('0','1','2','3','4','5','6','7','8','9') DEFAULT NULL COMMENT '号码',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=246 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_views` */
 
@@ -93,7 +93,7 @@ CREATE TABLE `cp_data_result_views` (
   `start_qi_date` date DEFAULT NULL COMMENT '开始期号开奖日期',
   `end_qi_date` date DEFAULT NULL COMMENT '结束期号开奖日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7104 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=169 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_views_ssc_bj` */
 
@@ -113,7 +113,7 @@ CREATE TABLE `cp_data_result_views_ssc_bj` (
   `start_qi_date` date DEFAULT NULL COMMENT '开始期号开奖日期',
   `end_qi_date` date DEFAULT NULL COMMENT '结束期号开奖日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_result_views_ssc_tj` */
 
@@ -133,7 +133,7 @@ CREATE TABLE `cp_data_result_views_ssc_tj` (
   `start_qi_date` date DEFAULT NULL COMMENT '开始期号开奖日期',
   `end_qi_date` date DEFAULT NULL COMMENT '结束期号开奖日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_data_sys_config` */
 
@@ -151,7 +151,7 @@ CREATE TABLE `cp_data_sys_config` (
   `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Table structure for table `cp_parity_analysis` */
 
@@ -165,7 +165,7 @@ CREATE TABLE `cp_parity_analysis` (
   `batch_num` bigint(20) NOT NULL,
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

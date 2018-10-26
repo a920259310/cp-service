@@ -7,6 +7,7 @@ import cn.ananyz.cp.service.utils.DateUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.nodes.FormElement;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 
@@ -28,22 +29,34 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
     }
 
     private Document getTodayDocument(Date date) throws IOException {
-//        Document doc = Jsoup.connect("http://www.bwlc.net/bulletin/prevtrax.html").get();
-        Document doc = Jsoup.connect("https://www.78977a.com/draw-pk10-today.html").get();
+//        Document doc = Jsoup.connect("https://kjh.55128.cn/k/kjls/gpc-bjpk10-20181026.html").get();
+        Document doc = Jsoup.connect("https://kjh.55128.cn/k/kjls/gpc-bjpk10.html").get();
+//        Document doc = Jsoup.connect("https://www.78977a.com/draw-pk10-today.html").get();
         return doc;
     }
 
     private Elements getTodayElements(Document document){
         Element tbody = document.getElementsByTag("tbody").last();
         Elements tr = tbody.getElementsByTag("tr");
-        tr.remove(0);
+//        tr.remove(0);
         return tr;
     }
 
     public static void main(String[] args) throws IOException, ParseException {
         CpApiBjImpl cpApibj = new CpApiBjImpl();
-        List<CPDataModel2> todayAllDatas = cpApibj.getTodayAllDatas(new Date());
-        System.out.println(todayAllDatas);
+
+        Document document = cpApibj.getTodayDocument(new Date());
+        Elements todayElements = cpApibj.getTodayElements(document);
+        List<CPDataModel2> cpDataModels = new ArrayList<CPDataModel2>();
+        cpApibj.getCpDataModel2ByElements(cpDataModels,todayElements);
+        System.out.println(cpDataModels);
+
+//        Elements todayElements = getTodayElements(document);
+//
+//        getCpDataModel2ByElements(cpDataModels, todayElements);
+
+//        List<CPDataModel2> todayAllDatas = cpApibj.getTodayAllDatas(new Date());
+//        System.out.println(todayAllDatas);
 //        List<CPDataModel2> dataByQiHao = cpApibj.getDataByQiHao(692845);
 //        System.out.println(dataByQiHao);
     }
@@ -84,13 +97,11 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
             Element next = iterator.next();
 
             Elements tds = next.getElementsByTag("td");
-            String[] split1 = tds.first().text().split(" ");
+            List<Element> elements = tds.subList(0, tds.size());
+            String opentime = elements.get(0).text();//期号
+            String dataPeriod = elements.get(1).text();//开奖时间
 
-            String dataPeriod = split1[0];   //期号
-            String opentime = split1[1]; //开奖时间
-
-            Element element = tds.get(1);
-            String span = element.getElementsByTag("div").first().tagName("span").text();
+            String span = elements.get(2).getElementsByTag("span").text();
 
             String dataWinNumber = span; //号码
 
@@ -98,7 +109,7 @@ public class CpApiBjImpl extends BaseCpApiImpl implements CpApiBj {
             cPDataModel2.setLongDateAndQiHao(dataPeriod);
             cPDataModel2.setShortQiHao(dataPeriod);
 
-            String dateTime = DateUtil.formatDate(new Date(), DateUtil.PATTERN_DATE) + " " + opentime;
+            String dateTime = DateUtil.formatDate(DateUtil.parseDate(opentime,DateUtil.PATTERN_DATE_TIME_), DateUtil.PATTERN_DATE_TIME);
             cPDataModel2.setOpenTime(DateUtil.parseDate(dateTime,DateUtil.PATTERN_DATE_TIME));
 
             String[] split = dataWinNumber.trim().split(" ");

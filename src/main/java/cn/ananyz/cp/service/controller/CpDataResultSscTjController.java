@@ -48,6 +48,7 @@ public class CpDataResultSscTjController {
     public void initToday() throws IOException, ParseException {
 
         List<CPDataModel> todayAllData = cpApi500.getTodayAllData(new Date());
+
         insertCpDatas(todayAllData);
 
     }
@@ -82,7 +83,9 @@ public class CpDataResultSscTjController {
         });
 
         for(CPDataModel cpDataModel : todayAllData){
-            convertCpApiToCpDataResult(cpDataModel);
+            List<CpDataResultSscTj> cpDataResultSscTjs = convertCpApiToCpDataResult(cpDataModel);
+            cpDataResultSscTjService.insertBatch(cpDataResultSscTjs);
+
             List<CpDataResultView> analyzi = cpDataResultSscTjService.analyzi(cpDataResultSscTjConfig.getListIndex(), cpDataResultSscTjConfig.getStart(), cpDataResultSscTjConfig.getEnd(), cpDataResultSscTjConfig.getDiffNum(),cpDataResultSscTjConfig.getOneDayLastQihao());
             cpDataResultViewsSscTjService.insert(analyzi);
         }
@@ -98,9 +101,6 @@ public class CpDataResultSscTjController {
         List<CPDataModel> todayAllData = cpApi500.getTodayAllData(add);
         List<CpDataResultSscTj> cpDataResultSscTjs = convertBatchCpApiToCpDataResult(todayAllData);
         cpDataResultSscTjService.insertBatch(cpDataResultSscTjs);
-//        CPDataModel todayLastData = cpApi500.getTodayLastData(add);
-//        convertCpApiToCpDataResult(todayLastData);
-//        convertBatchCpApiToCpDataResult
     }
 
     /**
